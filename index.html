@@ -50,10 +50,10 @@
                 <a href="https://discord.gg/gYcNZgGmkE" class="btn btn-primary" target="_blank" rel="noopener noreferrer" data-i18n="discord">
                     公式Discord
                 </a>
-                <a href="rule.html" class="btn btn-secondary" data-i18n="rule">
+                <a href="rule/" class="btn btn-secondary" data-i18n="rule">
                     ルール確認
                 </a>
-                <a href="love.html" class="btn btn-secondary" data-i18n="love_page">
+                <a href="love/" class="btn btn-secondary" data-i18n="love_page">
                     ガチ推し特設
                 </a>
                 <a href="https://github.com/cahju2/LzPvP" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">
@@ -133,6 +133,72 @@
         </div>
     </footer>
 
+    <script>
+        const translations = {
+            ja: {
+                unofficial: "UNOFFICIAL",
+                subtitle: "非公式ファンサイト",
+                card1_title: "ガチ推し特設ページ",
+                card1_desc: "LzPvPサーバーの魅力や愛を詰め込んだ専用ページです。",
+                card2_title: "サーバーの掟 (Rules)",
+                card2_desc: "皆が楽しく遊ぶための基本ルールと禁止事項の確認はこちら。",
+                points_title: "LzPvPのここが推せる",
+                point_1: "1.21の最新技術で対戦が楽しめる",
+                point_2: "多彩なKitが用意されている",
+                point_3: "現在テスター募集中",
+                arena_title: "アリーナ紹介",
+                arena_desc: "<strong>1.21対応</strong>の迫力あるPvPが楽しめる、最新鋭の特設アリーナ。多彩なステージ環境を駆使して、王座を目指せ。",
+                footer_text: "このサイトは非公式に制作されたファンサイトです。",
+                loading: "読み込み中...",
+                click_copy: "CLICK TO COPY IP",
+                discord: "公式Discord",
+                rule: "ルール確認",
+                love_page: "ガチ推し特設"
+            },
+            en: {
+                unofficial: "UNOFFICIAL",
+                subtitle: "UNOFFICIAL FAN SITE",
+                card1_title: "Special Fan Page",
+                card1_desc: "A dedicated page filled with love and the charm of the LzPvP server.",
+                card2_title: "Server Rules",
+                card2_desc: "Click here to check the basic rules and forbidden actions for a better experience.",
+                points_title: "Why we love LzPvP",
+                point_1: "Enjoy battles with 1.21 technology",
+                point_2: "Various Kits are available",
+                point_3: "Now looking for testers",
+                arena_title: "Arena Showcase",
+                arena_desc: "A state-of-the-art special arena where you can enjoy intense PvP compatible with <strong>1.21</strong>. Aim for the throne by mastering various stage environments.",
+                footer_text: "This is an unofficial fan site.",
+                loading: "Loading...",
+                click_copy: "CLICK TO COPY IP",
+                discord: "Official Discord",
+                rule: "Rules",
+                love_page: "Special Fan Page"
+            }
+        };
+
+        function switchLang(lang) {
+            document.getElementById('lang-jp').classList.toggle('active', lang === 'ja');
+            document.getElementById('lang-en').classList.toggle('active', lang === 'en');
+            
+            const elements = document.querySelectorAll('[data-i18n]');
+            elements.forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang][key]) {
+                    el.innerHTML = translations[lang][key];
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const userLang = navigator.language || navigator.userLanguage;
+            if (!userLang.startsWith('ja')) {
+                switchLang('en');
+            } else {
+                switchLang('ja');
+            }
+        });
+    </script>
     <script src="script.js"></script>
 </body>
 </html>
