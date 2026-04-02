@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LzPvP | ガチ推し特設ページ</title>
+    <link rel="icon" href="LzPvP.png" type="image/png">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700;900&family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #0b0f14;
+            --primary: #00f2fe;
+            --primary-glow: rgba(0, 242, 254, 0.2);
+            --text-main: #f0f6fc;
+            --text-muted: #8b949e;
+            --border: rgba(255, 255, 255, 0.05);
+            --card-bg: rgba(255, 255, 255, 0.01);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* スムーズなスクロールを有効化 */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.8;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+            padding: 0 20px;
+        }
+
+        /* 背景の光彩 */
+        .bg-glow {
+            position: fixed;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1000px;
+            height: 1000px;
+            background: radial-gradient(circle, rgba(0, 242, 254, 0.06) 0%, rgba(0, 0, 0, 0) 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* 🌐 言語切り替えスイッチ（画面右上に固定） */
+        .lang-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            background: rgba(11, 15, 20, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 5px 12px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            display: flex;
+            gap: 6px;
+            z-index: 100;
+        }
+
+        .lang-btn {
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .lang-btn.active {
+            color: var(--primary);
+            text-shadow: 0 0 10px var(--primary-glow);
+        }
+
+        .lang-btn:hover:not(.active) {
+            color: var(--text-main);
+        }
+
+        /* --- 1. ヘッダー / メインビジュアル --- */
+        .hero-love {
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            width: 100%;
+            max-width: 800px;
+            padding: 60px 0;
+        }
+
+        .love-icon {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 2px solid var(--primary);
+            box-shadow: 0 0 30px var(--primary-glow);
+            margin-bottom: 30px;
+            image-rendering: pixelated;
+            transition: transform 0.3s ease;
+        }
+        
+        .love-icon:hover {
+            transform: scale(1.05);
+        }
+
+        .tagline {
+            font-size: 1rem;
+            color: var(--primary);
+            letter-spacing: 4px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .server-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 5rem;
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 20px;
+            background: linear-gradient(to bottom, #fff 50%, #888 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .intro-text {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin-bottom: 40px;
+        }
+
+        .scroll-down {
+            color: var(--primary);
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-decoration: none;
+            border: 1px solid var(--primary);
+            padding: 10px 20px;
+            border-radius: 30px;
+            background: rgba(0, 242, 254, 0.03);
+            transition: all 0.2s ease;
+        }
+
+        .scroll-down:hover {
+            background: rgba(0, 242, 254, 0.1);
+            box-shadow: 0 0 15px var(--primary-glow);
+        }
+
+        /* --- 2. コンテンツセクション --- */
+        .content-container {
+            width: 100%;
+            max-width: 700px;
+            padding-bottom: 100px;
+        }
+
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border), transparent);
+            margin: 60px 0;
+        }
+
+        /* ガチ推しポイントの各ブロック */
+        .point-block {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 40px;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+        }
+
+        .point-block:hover {
+            border-color: rgba(0, 242, 254, 0.2);
+            background: rgba(255, 255, 255, 0.02);
+            transform: translateY(-5px);
+        }
+
+        .point-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .point-num {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--primary);
+            opacity: 0.5;
+        }
+
+        .point-title {
+            font-size: 1.4rem;
+            font-weight: 900;
+            color: #fff;
+        }
+
+        .point-text {
+            font-size: 1rem;
+            color: var(--text-muted);
+            line-height: 1.8;
+            text-align: justify;
+        }
+
+        /* --- 3. 締めくくりのセクション --- */
+        .love-letter {
+            text-align: center;
+            padding: 60px 40px;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.02), rgba(0, 242, 254, 0.02));
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            margin-top: 20px;
+        }
+
+        .letter-title {
+            font-size: 1.6rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .letter-body {
+            font-size: 1rem;
+            color: var(--text-muted);
+            max-width: 550px;
+            margin: 0 auto 30px auto;
+        }
+
+        .back-home {
+            display: inline-block;
+            text-decoration: none;
+            color: var(--text-main);
+            font-size: 0.9rem;
+            font-weight: 700;
+            padding: 12px 30px;
+            border-radius: 8px;
+            background: #fff;
+            color: var(--bg-color);
+            transition: all 0.2s ease;
+        }
+
+        .back-home:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
+        }
+
+        /* レスポンシブ */
+        @media (max-width: 768px) {
+            .server-title { font-size: 3.5rem; }
+            .point-block { padding: 30px; }
+            .point-title { font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-glow"></div>
+
+    <div class="lang-switcher">
+        <span id="lang-jp" class="lang-btn active" onclick="switchLang('ja')">JP</span>
+        <span style="opacity: 0.3;">/</span>
+        <span id="lang-en" class="lang-btn" onclick="switchLang('en')">EN</span>
+    </div>
+
+    <header class="hero-love">
+        <img src="LzPvP.png" alt="LzPvP Icon" class="love-icon">
+        <p class="tagline" data-i18n="tagline">Why I Love This Server</p>
+        <h1 class="server-title">LzPvP</h1>
+        <p class="intro-text" data-i18n="intro_text">
+            数あるマイクラサーバーの中でも、なんで自分がここに惹かれて応援し続けてるのか。
+            飾った言葉じゃ伝えきれない、リアルな「ガチ推し」の理由をここにブチまけます。
+        </p>
+        <a href="#content" class="scroll-down" data-i18n="scroll_btn">スクロールして読む ↓</a>
+    </header>
+
+    <div class="content-container" id="content">
+        
+        <div class="section-divider"></div>
+
+        <div class="point-block">
+            <div class="point-header">
+                <span class="point-num">01</span>
+                <h2 class="point-title" data-i18n="title_1">1.21っていう「今」のマイクラで戦えるのが最高</h2>
+            </div>
+            <div class="point-text" data-i18n="text_1">
+                昔のバージョンのPvPが良いのはもちろん分かってるけど、LzPvPがあえて**1.21の最新環境**で勝負してるところが本当に刺さるんだよね。新しいアイテムとか仕様がガンガン絡んでくるから、毎回「そう来るか！」って新鮮なスリルがあって全然飽きない。古いバージョンだけに引きこもらないで、今のマイクラの面白さをトコトン引き出そうとしてる。この攻めの開発姿勢を見てるだけで、こっちまでワクワクしてくるし、全力で応援したくなるんだわ。
+            </div>
+        </div>
+
+        <div class="point-block">
+            <div class="point-header">
+                <span class="point-num">02</span>
+                <h2 class="point-title" data-i18n="title_2">戦略を考えるのが楽しすぎる多彩なKit</h2>
+            </div>
+            <div class="point-text" data-i18n="text_2">
+                ただの武器の殴り合いで終わらないのがLzPvP。その日の気分とか自分の得意なスタイルに合わせて**いろんなKitを選べる**のがマジで面白い。ヒット＆アウェイで翻弄するか、ゴリゴリの重装備で圧倒するか、それとも一癖ある能力で相手の裏をかくか。Kitを選ぶ画面の時点から、もう頭の中でバトルのシミュレーションが始まってて、このワクワク感は他じゃなかなか味わえないね。
+            </div>
+        </div>
+
+        <div class="point-block">
+            <div class="point-header">
+                <span class="point-num">03</span>
+                <h2 class="point-title" data-i18n="title_3">テスターとして一緒にサーバーを作っていける熱量</h2>
+            </div>
+            <div class="point-text" data-i18n="text_3">
+                出来上がったサーバーで遊ぶのもいいけど、まだこれからって時に**テスターとして開発の熱い空気に触れられる**のは今だけの特権。自分のプレイとか気づいたことが、そのままサーバーの未来に繋がっていく。ただの「客」として遊ぶだけじゃなくて、コミュニティのみんなと一緒にこの場所を盛り上げていける感じが最高に楽しいし、だからこそ初期からずっと目が離せないんだよね。
+            </div>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <div class="love-letter">
+            <h2 class="letter-title" data-i18n="closing_title">おわりに</h2>
+            <div class="letter-body">
+                <p data-i18n="closing_p1">LzPvPは、ただのゲームサーバーっていう枠を超えて、自分にとって最高にワクワクする「居場所」になりつつあります。これからもこの熱量を絶やすことなく、影ながら、そして時には全力で応援し続けたいと思います。</p>
+                <p style="margin-top: 15px; font-weight: 700; color: var(--primary);" data-i18n="closing_p2">LzPvP、最高のサーバーをありがとう！</p>
+            </div>
+            <a href="index.html" class="back-home" data-i18n="back_btn">← ホームサイトに戻る</a>
+        </div>
+
+    </div>
+
+    <script>
+        const translations = {
+            ja: {
+                tagline: "Why I Love This Server",
+                intro_text: "数あるマイクラサーバーの中でも、なんで自分がここに惹かれて応援し続けてるのか。飾った言葉じゃ伝えきれない、リアルな「ガチ推し」の理由をここにブチまけます。",
+                scroll_btn: "スクロールして読む ↓",
+                title_1: "1.21っていう「今」のマイクラで戦えるのが最高",
+                text_1: "昔のバージョンのPvPが良いのはもちろん分かってるけど、LzPvPがあえて<strong>1.21の最新環境</strong>で勝負してるところが本当に刺さるんだよね。新しいアイテムとか仕様がガンガン絡んでくるから、毎回「そう来るか！」って新鮮なスリルがあって全然飽きない。古いバージョンだけに引きこもらないで、今のマイクラの面白さをトコトン引き出そうとしてる。この攻めの開発姿勢を見てるだけで、こっちまでワクワクしてくるし、全力で応援したくなるんだわ。",
+                title_2: "戦略を考えるのが楽しすぎる多彩なKit",
+                text_2: "ただの武器の殴り合いで終わらないのがLzPvP。その日の気分とか自分の得意なスタイルに合わせて<strong>いろんなKitを選べる</strong>のがマジで面白い。ヒット＆アウェイで翻弄するか、ゴリゴリの重装備で圧倒するか、それとも一癖ある能力で相手の裏をかくか。Kitを選ぶ画面の時点から、もう頭の中でバトルのシミュレーションが始まってて、このワクワク感は他じゃなかなか味わえないね。",
+                title_3: "テスターとして一緒にサーバーを作っていける熱量",
+                text_3: "出来上がったサーバーで遊ぶのもいいけど、まだこれからって時に<strong>テスターとして開発の熱い空気に触れられる</strong>のは今だけの特権。自分のプレイとか気づいたことが、そのままサーバーの未来に繋がっていく。ただの「客」として遊ぶだけじゃなくて、コミュニティのみんなと一緒にこの場所を盛り上げていける感じが最高に楽しいし、だからこそ初期からずっと目が離せないんだよね。",
+                closing_title: "おわりに",
+                closing_p1: "LzPvPは、ただのゲームサーバーっていう枠を超えて、自分にとって最高にワクワクする「居場所」になりつつあります。これからもこの熱量を絶やすことなく、影ながら、そして時には全力で応援し続けたいと思います。",
+                closing_p2: "LzPvP、最高のサーバーをありがとう！",
+                back_btn: "← ホームサイトに戻る"
+            },
+            en: {
+                tagline: "Why I Love This Server",
+                intro_text: "Out of all the Minecraft servers out there, why am I drawn to this place and keep supporting it? I'm going to share the real, unvarnished reasons why I'm a huge fan here.",
+                scroll_btn: "Scroll down to read ↓",
+                title_1: "Battling in the current 1.21 Minecraft is simply the best",
+                text_1: "I know old version PvP is great, but it really hits me that LzPvP takes on the challenge in the <strong>latest 1.21 environment</strong>. New items and mechanics are heavily involved, so every battle has a fresh thrill. They're not just retreating into old versions, but trying to bring out the fun of current Minecraft. Just watching this aggressive development makes me excited and want to support them with all my heart.",
+                title_2: "A wide variety of Kits that make strategizing too fun",
+                text_2: "LzPvP is not just about weapon clashing. It's really interesting that you can <strong>choose various Kits</strong> according to your mood or your favorite style that day. Whether you play hit-and-run, overwhelm with heavy armor, or outwit your opponent with unique abilities. The battle simulation is already starting in my head from the Kit selection screen, and this excitement can't be found anywhere else.",
+                title_3: "The heat of building the server together as a tester",
+                text_3: "Playing on a finished server is fine, but being able to <strong>feel the hot air of development as a tester</strong> when it's still coming is a privilege only for now. My play and findings lead directly to the future of the server. It's great fun to build up this place with the community instead of just playing as a customer, and that's why I can't take my eyes off it from the beginning.",
+                closing_title: "In closing",
+                closing_p1: "LzPvP is becoming my absolute favorite place that goes beyond just a game server. I will keep supporting it with all my might, sometimes in the shadows and sometimes in the spotlight.",
+                closing_p2: "Thank you LzPvP for the best server!",
+                back_btn: "← Back to Home"
+            }
+        };
+
+        function switchLang(lang) {
+            // ボタンのアクティブ表示切り替え
+            document.getElementById('lang-jp').classList.toggle('active', lang === 'ja');
+            document.getElementById('lang-en').classList.toggle('active', lang === 'en');
+            
+            // 属性「data-i18n」がついた要素を全取得して中身を書き換える
+            const elements = document.querySelectorAll('[data-i18n]');
+            elements.forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang][key]) {
+                    el.innerHTML = translations[lang][key];
+                }
+            });
+        }
+
+        // ページ読み込み時にブラウザの言語をチェック
+        document.addEventListener('DOMContentLoaded', () => {
+            const userLang = navigator.language || navigator.userLanguage;
+            if (!userLang.startsWith('ja')) {
+                switchLang('en');
+            } else {
+                switchLang('ja');
+            }
+        });
+    </script>
+</body>
+</html>

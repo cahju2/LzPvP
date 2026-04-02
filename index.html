@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LzPvP | Unofficial Fansite</title>
+    
+    <link rel="icon" href="LzPvP.png" type="image/png">
+    
+    <meta property="og:title" content="【非公式】LzPvP | ファンサイト">
+    <meta property="og:description" content="1.21対応の最新PvPサーバー「LzPvP」の非公式ファンサイト。">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://cahju2.github.io/LzPvP/LzPvP.png">
+    <meta name="twitter:card" content="summary">
+
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="bg-glow"></div>
+
+    <header>
+        <div class="logo">
+            <img src="LzPvP.png" alt="" class="logo-img">
+            <span>LzPvP</span>
+            <small data-i18n="unofficial">UNOFFICIAL</small>
+        </div>
+        
+        <div class="header-right">
+            <div class="lang-switcher">
+                <span id="lang-jp" class="lang-btn active" onclick="switchLang('ja')">JP</span>
+                <span class="lang-divider">/</span>
+                <span id="lang-en" class="lang-btn" onclick="switchLang('en')">EN</span>
+            </div>
+            <div class="status-tag" id="player-count">読み込み中...</div>
+        </div>
+    </header>
+
+    <main class="hero">
+        <div class="hero-content">
+            <h1 class="main-title">LzPvP</h1>
+            
+            <div class="ip-card" onclick="copyIP()" id="ip-val">
+                <span class="ip-text">LzPvP.xyz</span>
+                <span class="copy-hint" data-i18n="click_copy">CLICK TO COPY IP</span>
+            </div>
+            
+            <div class="links-group">
+                <a href="https://discord.gg/gYcNZgGmkE" class="btn btn-primary" target="_blank" rel="noopener noreferrer" data-i18n="discord">
+                    公式Discord
+                </a>
+                <a href="rule.html" class="btn btn-secondary" data-i18n="rule">
+                    ルール確認
+                </a>
+                <a href="love.html" class="btn btn-secondary" data-i18n="love_page">
+                    ガチ推し特設
+                </a>
+                <a href="https://github.com/cahju2/LzPvP" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">
+                    GitHub
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <section class="content-section">
+        <div class="mc-server-card">
+            <img src="LzPvP.png" alt="Server Icon" class="mc-icon" id="mc-icon">
+            <div class="mc-info">
+                <div class="mc-top-row">
+                    <span class="mc-name">LzPvP</span>
+                    <span class="mc-players" id="mc-players-card">0/0</span>
+                </div>
+                <div class="mc-motd" id="mc-motd"></div>
+            </div>
+            <div class="mc-ping" id="mc-ping"></div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="glass-card">
+            <h2 data-i18n="points_title">LzPvPのここが推せる</h2>
+            <ul class="styled-list">
+                <li data-i18n="point_1">1.21の最新技術で対戦が楽しめる</li>
+                <li data-i18n="point_2">多彩なKitが用意されている</li>
+                <li data-i18n="point_3">現在テスター募集中</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="arena-card">
+            <div class="arena-header">
+                <div class="arena-title">
+                    <span class="arena-icon">⚔️</span>
+                    <h3 data-i18n="arena_title">アリーナ紹介</h3>
+                </div>
+                <span class="arena-subtitle" id="arena-stage-title">PvP Stage #1</span>
+            </div>
+            
+            <div class="arena-slider">
+                <div class="arena-img-list">
+                    <div class="arena-img-item active"><img src="arena1.png" alt="Arena Image 1"></div>
+                    <div class="arena-img-item"><img src="LzPvP.png" alt="Arena Image 2"></div>
+                    <div class="arena-img-item"><img src="LzPvP.png" alt="Arena Image 3"></div>
+                </div>
+
+                <div class="arena-nav">
+                    <button class="prev-arrow" onclick="moveSlide(-1)">＜</button>
+                    <button class="next-arrow" onclick="moveSlide(1)">＞</button>
+                </div>
+
+                <div class="arena-dots">
+                    <span class="dot active" onclick="currentSlide(0)"></span>
+                    <span class="dot" onclick="currentSlide(1)"></span>
+                    <span class="dot" onclick="currentSlide(2)"></span>
+                </div>
+            </div>
+            
+            <div class="arena-footer">
+                <p class="arena-desc" data-i18n="arena_desc">
+                    <strong>1.21対応</strong>の迫力あるPvPが楽しめる、最新鋭の特設アリーナ。多彩なステージ環境を駆使して、王座を目指せ。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p data-i18n="footer_text">このサイトは非公式に制作されたファンサイトです。</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

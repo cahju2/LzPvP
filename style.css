@@ -1,0 +1,510 @@
+:root {
+    --bg-color: #0b0f14;
+    --primary: #00f2fe;
+    --primary-glow: rgba(0, 242, 254, 0.2);
+    --text-main: #f0f6fc;
+    --text-muted: #8b949e;
+    --border: rgba(255, 255, 255, 0.05);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    line-height: 1.6;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* --- 背景の自然な発光 --- */
+.bg-glow {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(0, 242, 254, 0.08) 0%, rgba(0, 0, 0, 0) 70%);
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* --- Header --- */
+header {
+    width: 100%;
+    max-width: 1000px;
+    padding: 30px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-img {
+    height: 36px;
+    width: 36px;
+    border-radius: 50%;
+}
+
+.logo span {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+.logo small {
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* 🌐 言語切り替えスイッチ */
+.lang-switcher {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    background: rgba(255, 255, 255, 0.02);
+    padding: 5px 12px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    display: flex;
+    gap: 6px;
+}
+
+.lang-btn {
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.lang-btn.active {
+    color: var(--primary);
+    text-shadow: 0 0 10px var(--primary-glow);
+}
+
+.lang-btn:hover:not(.active) {
+    color: var(--text-main);
+}
+
+.status-tag {
+    font-size: 0.8rem;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 6px 14px;
+    border-radius: 30px;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+}
+
+/* --- Hero Section --- */
+.hero {
+    min-height: 40vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    max-width: 800px;
+    padding: 40px 20px;
+}
+
+.hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.main-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -1px;
+    background: linear-gradient(to bottom, #fff 40%, #888 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* --- スタイリッシュなIPカード --- */
+.ip-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border);
+    padding: 20px 50px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.ip-card:hover {
+    background: rgba(0, 242, 254, 0.03);
+    border-color: var(--primary);
+    box-shadow: 0 0 20px var(--primary-glow);
+}
+
+.ip-text {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--text-main);
+}
+
+.copy-hint {
+    color: var(--primary);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+/* --- ボタン類 --- */
+.links-group {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.btn {
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+}
+
+.btn-primary {
+    background: var(--text-main);
+    color: var(--bg-color);
+}
+
+.btn-primary:hover {
+    background: #e0e6ec;
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--text-main);
+    border: 1px solid var(--border);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: var(--text-muted);
+}
+
+/* --- Hypixel風カード --- */
+.mc-server-card {
+    background: #090c10;
+    border: 1px solid var(--border);
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+    border-radius: 12px;
+    transition: all 0.2s ease;
+    min-height: 80px; 
+}
+
+.mc-server-card:hover {
+    border-color: rgba(255,255,255,0.1);
+    background: #0d1116;
+}
+
+.mc-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 4px;
+    image-rendering: pixelated;
+    object-fit: contain;
+}
+
+.mc-info {
+    flex-grow: 1;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.mc-top-row {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 700;
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+.mc-name { color: #fff; }
+.mc-players { color: var(--text-muted); font-size: 0.9rem; }
+
+.mc-motd {
+    font-size: 0.85rem;
+    margin-top: 2px;
+    word-break: break-all;
+}
+
+/* 📶 Pingアンテナ */
+.mc-ping {
+    width: 20px;
+    height: 20px;
+    background: 
+        linear-gradient(90deg, 
+            transparent 0%, transparent 20%,
+            var(--ping-color) 20%, var(--ping-color) 40%,
+            transparent 40%, transparent 60%,
+            var(--ping-color) 60%, var(--ping-color) 80%,
+            transparent 80%, transparent 100%
+        );
+    background-size: cover;
+    background-repeat: no-repeat;
+    --ping-color: #444; 
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.mc-server-card.is-offline {
+    opacity: 0.6;
+}
+.mc-server-card.is-offline .mc-ping {
+    filter: grayscale(100%) brightness(50%);
+}
+
+/* --- コンテンツセクション --- */
+.content-section {
+    width: 100%;
+    max-width: 600px;
+    padding: 15px 20px;
+}
+
+/* --- 箇条書きカード --- */
+.glass-card {
+    background: rgba(255, 255, 255, 0.01);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 30px;
+}
+
+.glass-card h2 {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    text-align: center;
+    color: #fff;
+    font-weight: 700;
+}
+
+.styled-list {
+    list-style: none;
+}
+
+.styled-list li {
+    padding: 8px 0;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.styled-list li:last-child {
+    border-bottom: none;
+}
+
+/* --- アリーナ紹介カード専用のデザイン --- */
+.arena-card {
+    background: rgba(255, 255, 255, 0.01);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.arena-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.arena-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.arena-icon {
+    font-size: 1.1rem;
+}
+
+.arena-card h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.arena-subtitle {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+/* --- アリーナ・スライダー --- */
+.arena-slider {
+    width: 100%;
+    height: 250px;
+    position: relative;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+}
+
+.arena-img-list {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.arena-img-item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+    z-index: 1;
+}
+
+/* activeクラスがついた画像だけを表に表示する */
+.arena-img-item.active {
+    opacity: 1;
+    z-index: 2;
+}
+
+.arena-img-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* 矢印 */
+.arena-nav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 15px;
+    pointer-events: none;
+}
+
+.arena-nav button {
+    pointer-events: auto;
+    width: 36px;
+    height: 36px;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 700;
+    transition: all 0.2s ease;
+}
+
+.arena-nav button:hover {
+    background: rgba(0, 242, 254, 0.4);
+}
+
+/* ドット */
+.arena-dots {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    z-index: 10;
+}
+
+.arena-dots .dot {
+    width: 8px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.arena-dots .dot.active {
+    background: #fff;
+}
+
+.arena-desc {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+.arena-desc strong {
+    color: var(--primary);
+}
+
+/* Footer */
+footer {
+    width: 100%;
+    text-align: center;
+    padding: 40px 20px;
+    border-top: 1px solid var(--border);
+    color: #444;
+    font-size: 0.8rem;
+    margin-top: 30px;
+}
+
+@media (max-width: 768px) {
+    .main-title { font-size: 2.5rem; }
+    .ip-text { font-size: 1.5rem; }
+    .ip-card { padding: 15px 30px; }
+    
+    .arena-slider {
+        height: 180px;
+    }
+
+    header {
+        flex-direction: column;
+        gap: 15px;
+    }
+}
