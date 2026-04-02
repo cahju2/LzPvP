@@ -3,7 +3,8 @@
 // --- 🌐 多言語対応 (i18n) の設定 ---
 const translations = {
     ja: {
-        unofficial: "非公式",
+        loading: "読み込み中...",
+	unofficial: "非公式",
         click_copy: "クリックしてIPをコピー",
         discord: "公式Discord",
         rule: "ルール確認",
@@ -17,7 +18,8 @@ const translations = {
         footer_text: "このサイトは非公式に制作されたファンサイトです。"
     },
     en: {
-        unofficial: "UNOFFICIAL",
+        loading: "Loading...",
+	unofficial: "UNOFFICIAL",
         click_copy: "CLICK TO COPY IP",
         discord: "Official Discord",
         rule: "Rule",
