@@ -10,8 +10,8 @@
     <meta property="og:title" content="【非公式】LzPvP | ファンサイト">
     <meta property="og:description" content="1.21対応の最新PvPサーバー「LzPvP」の非公式ファンサイト。">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="https://cahju2.github.io/LzPvP/LzPvP.png">
-    <meta name="twitter:card" content="summary">
+    <meta property="og:image" content="https://cahju2.github.io/LzPvP/humisan.png">
+    <meta name="twitter:card" content="summary_large_image">
 
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
@@ -102,7 +102,7 @@
                 <div class="arena-img-list">
                     <div class="arena-img-item active"><img src="arena1.png" alt="Arena Image 1"></div>
                     <div class="arena-img-item"><img src="LzPvP.png" alt="Arena Image 2"></div>
-                    <div class="arena-img-item"><img src="LzPvP.png" alt="Arena Image 3"></div>
+                    <div class="arena-img-item"><img src="humisan.png" alt="Arena Image 3"></div>
                 </div>
 
                 <div class="arena-nav">
@@ -138,10 +138,6 @@
             ja: {
                 unofficial: "UNOFFICIAL",
                 subtitle: "非公式ファンサイト",
-                card1_title: "ガチ推し特設ページ",
-                card1_desc: "LzPvPサーバーの魅力や愛を詰め込んだ専用ページです。",
-                card2_title: "サーバーの掟 (Rules)",
-                card2_desc: "皆が楽しく遊ぶための基本ルールと禁止事項の確認はこちら。",
                 points_title: "LzPvPのここが推せる",
                 point_1: "1.21の最新技術で対戦が楽しめる",
                 point_2: "多彩なKitが用意されている",
@@ -154,14 +150,11 @@
                 discord: "公式Discord",
                 rule: "ルール確認",
                 love_page: "ガチ推し特設"
+                // 🚨 キット関連の翻訳データも削除したぜ！
             },
             en: {
                 unofficial: "UNOFFICIAL",
                 subtitle: "UNOFFICIAL FAN SITE",
-                card1_title: "Special Fan Page",
-                card1_desc: "A dedicated page filled with love and the charm of the LzPvP server.",
-                card2_title: "Server Rules",
-                card2_desc: "Click here to check the basic rules and forbidden actions for a better experience.",
                 points_title: "Why we love LzPvP",
                 point_1: "Enjoy battles with 1.21 technology",
                 point_2: "Various Kits are available",
@@ -174,6 +167,7 @@
                 discord: "Official Discord",
                 rule: "Rules",
                 love_page: "Special Fan Page"
+                // 🚨 キット関連の翻訳データも削除したぜ！
             }
         };
 
@@ -200,5 +194,55 @@
         });
     </script>
     <script src="script.js"></script>
-</body>
+
+    <script>
+        let slideIndex = 0; // 現在表示している画像の番号（0からスタート）
+        showSlides(slideIndex); // 初期表示
+
+        // 「＜」または「＞」ボタンが押されたときの処理
+        function moveSlide(n) {
+            showSlides(slideIndex += n);
+        }
+
+        // 下の「ドット（●）」が押されたときの処理
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+
+        // 画像を表示・切り替えるメインの処理
+        function showSlides(n) {
+            const slides = document.getElementsByClassName("arena-img-item");
+            const dots = document.getElementsByClassName("dot");
+            const titleEl = document.getElementById("arena-stage-title"); // タイトルを書き換える場所
+
+            // 画像が1枚もないなら何もしない
+            if (slides.length === 0) return;
+
+            // 最後の画像で「＞」を押したら最初の画像に戻る
+            if (n >= slides.length) { slideIndex = 0 }
+            // 最初の画像で「＜」を押したら最後の画像に行く
+            if (n < 0) { slideIndex = slides.length - 1 }
+
+            // 全ての画像を一旦非表示にする
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].classList.remove("active");
+            }
+            // 全てのドットの「active」クラスを消す
+            for (let i = 0; i < dots.length; i++) {
+                dots[i].classList.remove("active");
+            }
+
+            // 現在の画像とドットに「active」クラスをつけて表示する
+            slides[slideIndex].classList.add("active");
+            dots[slideIndex].classList.add("active");
+
+            // 画像の「alt」属性の文字をタイトルに反映させる
+            const currentImg = slides[slideIndex].getElementsByTagName('img')[0];
+            if (currentImg && titleEl) {
+                // altが設定されていればそれを、なければ「PvP Stage #X」と表示するぜ
+                titleEl.innerText = currentImg.alt || `PvP Stage #${slideIndex + 1}`;
+            }
+        }
+    </script>
+    </body>
 </html>

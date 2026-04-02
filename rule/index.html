@@ -1,344 +1,180 @@
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LzPvP | Rules</title>
+    <title>LzPvP | Unofficial Fansite</title>
+    
     <link rel="icon" href="LzPvP.png" type="image/png">
     
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700;900&family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --bg-color: #0b0f14;
-            --primary: #00f2fe;
-            --primary-glow: rgba(0, 242, 254, 0.2);
-            --text-main: #f0f6fc;
-            --text-muted: #8b949e;
-            --border: rgba(255, 255, 255, 0.05);
-            --card-bg: rgba(255, 255, 255, 0.01);
-            --warning: #ff4a4a;
-        }
+    <meta property="og:title" content="【非公式】LzPvP | ファンサイト">
+    <meta property="og:description" content="1.21対応の最新PvPサーバー「LzPvP」の非公式ファンサイト。">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://cahju2.github.io/LzPvP/LzPvP.png">
+    <meta name="twitter:card" content="summary">
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: 'Noto Sans JP', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            line-height: 1.8;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            overflow-x: hidden;
-            padding: 0 20px;
-        }
-
-        /* 背景の光彩 */
-        .bg-glow {
-            position: fixed;
-            top: -100px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 1000px;
-            height: 1000px;
-            background: radial-gradient(circle, rgba(0, 242, 254, 0.06) 0%, rgba(0, 0, 0, 0) 70%);
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        /* 🌐 言語切り替えスイッチ（画面右上に固定） */
-        .lang-switcher {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 0.8rem;
-            font-weight: 700;
-            color: var(--text-muted);
-            background: rgba(11, 15, 20, 0.8);
-            backdrop-filter: blur(10px);
-            padding: 5px 12px;
-            border-radius: 20px;
-            border: 1px solid var(--border);
-            display: flex;
-            gap: 6px;
-            z-index: 100;
-        }
-
-        .lang-btn {
-            cursor: pointer;
-            transition: color 0.2s ease;
-        }
-
-        .lang-btn.active {
-            color: var(--primary);
-            text-shadow: 0 0 10px var(--primary-glow);
-        }
-
-        .lang-btn:hover:not(.active) {
-            color: var(--text-main);
-        }
-
-        /* --- ヘッダー --- */
-        header {
-            min-height: 40vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            width: 100%;
-            max-width: 800px;
-            padding: 60px 0;
-        }
-
-        .rule-title {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 4rem;
-            font-weight: 900;
-            line-height: 1;
-            margin-bottom: 15px;
-            background: linear-gradient(to bottom, #fff 50%, #888 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .rule-subtitle {
-            font-size: 1rem;
-            color: var(--text-muted);
-            letter-spacing: 2px;
-        }
-
-        /* --- コンテンツセクション --- */
-        .content-container {
-            width: 100%;
-            max-width: 700px;
-            padding-bottom: 100px;
-        }
-
-        /* ルールカード */
-        .rule-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 40px;
-            margin-bottom: 30px;
-            backdrop-filter: blur(5px);
-            transition: all 0.3s ease;
-        }
-
-        .rule-card:hover {
-            border-color: rgba(255, 255, 255, 0.1);
-            background: rgba(255, 255, 255, 0.02);
-        }
-
-        .rule-card h2 {
-            font-size: 1.4rem;
-            font-weight: 900;
-            color: #fff;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .rule-card h2::before {
-            content: '';
-            display: inline-block;
-            width: 4px;
-            height: 1.4rem;
-            background: var(--primary);
-            border-radius: 2px;
-            box-shadow: 0 0 10px var(--primary-glow);
-        }
-
-        .rule-list {
-            list-style: none;
-        }
-
-        .rule-list li {
-            position: relative;
-            padding-left: 24px;
-            margin-bottom: 12px;
-            color: var(--text-main);
-            font-size: 0.95rem;
-        }
-
-        .rule-list li::before {
-            content: '・';
-            position: absolute;
-            left: 0;
-            color: var(--primary);
-            font-weight: bold;
-        }
-
-        .rule-desc {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-top: 4px;
-            padding-left: 24px;
-            display: block;
-        }
-
-        /* 警告カード（チート禁止用） */
-        .warning-card {
-            border-color: rgba(255, 74, 74, 0.2);
-            background: rgba(255, 74, 74, 0.02);
-        }
-
-        .warning-card h2::before {
-            background: var(--warning);
-            box-shadow: 0 0 10px rgba(255, 74, 74, 0.4);
-        }
-
-        /* --- フッター --- */
-        .footer-action {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .back-home {
-            display: inline-block;
-            text-decoration: none;
-            color: var(--text-main);
-            font-size: 0.9rem;
-            font-weight: 700;
-            padding: 12px 30px;
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--border);
-            transition: all 0.2s ease;
-        }
-
-        .back-home:hover {
-            background: rgba(255, 255, 255, 0.06);
-            border-color: var(--text-muted);
-            transform: translateY(-2px);
-        }
-
-        /* レスポンシブ */
-        @media (max-width: 768px) {
-            .rule-title { font-size: 3rem; }
-            .rule-card { padding: 30px; }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
     <div class="bg-glow"></div>
 
-    <div class="lang-switcher">
-        <span id="lang-jp" class="lang-btn active" onclick="switchLang('ja')">JP</span>
-        <span style="opacity: 0.3;">/</span>
-        <span id="lang-en" class="lang-btn" onclick="switchLang('en')">EN</span>
-    </div>
-
     <header>
-        <h1 class="rule-title">Rules</h1>
-        <p class="rule-subtitle" data-i18n="subtitle">快適なプレイのためにルールを守りましょう</p>
+        <div class="logo">
+            <img src="LzPvP.png" alt="" class="logo-img">
+            <span>LzPvP</span>
+            <small data-i18n="unofficial">UNOFFICIAL</small>
+        </div>
+        
+        <div class="header-right">
+            <div class="lang-switcher">
+                <span id="lang-jp" class="lang-btn active" onclick="switchLang('ja')">JP</span>
+                <span class="lang-divider">/</span>
+                <span id="lang-en" class="lang-btn" onclick="switchLang('en')">EN</span>
+            </div>
+            <div class="status-tag" id="player-count" data-i18n="loading">読み込み中...</div>
+        </div>
     </header>
 
-    <div class="content-container">
+    <main class="hero">
+        <div class="hero-content">
+            <h1 class="main-title">LzPvP</h1>
+            
+            <div class="ip-card" onclick="copyIP()" id="ip-val">
+                <span class="ip-text">LzPvP.xyz</span>
+                <span class="copy-hint" data-i18n="click_copy">CLICK TO COPY IP</span>
+            </div>
+            
+            <div class="links-group">
+                <a href="https://discord.gg/gYcNZgGmkE" class="btn btn-primary" target="_blank" rel="noopener noreferrer" data-i18n="discord">
+                    公式Discord
+                </a>
+                <a href="rule/" class="btn btn-secondary" data-i18n="rule">
+                    ルール確認
+                </a>
+                <a href="love/" class="btn btn-secondary" data-i18n="love_page">
+                    ガチ推し特設
+                </a>
+                <a href="https://github.com/cahju2/LzPvP" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">
+                    GitHub
+                </a>
+            </div>
+        </div>
+    </main>
 
-        <div class="rule-card">
-            <h2 data-i18n="title_basic">基本ルール</h2>
-            <ul class="rule-list">
-                <li>
-                    <span data-i18n="basic_1">他プレイヤーへのリスペクトを忘れずに</span>
-                    <span class="rule-desc" data-i18n="basic_1_desc">煽りや暴言など、相手を不快にさせる行為は控えましょう。</span>
-                </li>
-                <li>
-                    <span data-i18n="basic_2">不具合の悪用禁止</span>
-                    <span class="rule-desc" data-i18n="basic_2_desc">バグを見つけた場合は、悪用せず速やかに運営へ報告してください。</span>
-                </li>
-                <li>
-                    <span data-i18n="basic_3">チャットの連投やスパムの禁止</span>
-                    <span class="rule-desc" data-i18n="basic_3_desc">チャット欄を荒らす行為は他のプレイヤーの迷惑になります。</span>
-                </li>
+    <section class="content-section">
+        <div class="mc-server-card">
+            <img src="LzPvP.png" alt="Server Icon" class="mc-icon" id="mc-icon">
+            <div class="mc-info">
+                <div class="mc-top-row">
+                    <span class="mc-name">LzPvP</span>
+                    <span class="mc-players" id="mc-players-card">0/0</span>
+                </div>
+                <div class="mc-motd" id="mc-motd"></div>
+            </div>
+            <div class="mc-ping" id="mc-ping"></div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="glass-card">
+            <h2 data-i18n="points_title">LzPvPのここが推せる</h2>
+            <ul class="styled-list">
+                <li data-i18n="point_1">1.21の最新技術で対戦が楽しめる</li>
+                <li data-i18n="point_2">多彩なKitが用意されている</li>
+                <li data-i18n="point_3">現在テスター募集中</li>
             </ul>
         </div>
+    </section>
 
-        <div class="rule-card warning-card">
-            <h2 data-i18n="title_forbidden">絶対禁止事項</h2>
-            <ul class="rule-list">
-                <li>
-                    <span data-i18n="forbid_1" style="color: var(--warning); font-weight: bold;">不正ツールの使用（チート行為）</span>
-                    <span class="rule-desc" data-i18n="forbid_1_desc">Hackクライアントや、ゲームを有利に進める非公式MODの使用は永久BANの対象です。</span>
-                </li>
-                <li>
-                    <span data-i18n="forbid_2">意図的なチーミング（ソロ戦など）</span>
-                    <span class="rule-desc" data-i18n="forbid_2_desc">個人戦の対戦モードにおいて、他プレイヤーと共謀して戦うことは禁止です。</span>
-                </li>
-                <li>
-                    <span data-i18n="forbid_3">他サーバーの宣伝行為</span>
-                    <span class="rule-desc" data-i18n="forbid_3_desc">無許可で他のマイクラサーバーやDiscordサーバーの宣伝を行うこと。</span>
-                </li>
-            </ul>
-        </div>
+    <section class="content-section">
+        <div class="arena-card">
+            <div class="arena-header">
+                <div class="arena-title">
+                    <span class="arena-icon">⚔️</span>
+                    <h3 data-i18n="arena_title">アリーナ紹介</h3>
+                </div>
+                <span class="arena-subtitle" id="arena-stage-title">PvP Stage #1</span>
+            </div>
+            
+            <div class="arena-slider">
+                <div class="arena-img-list">
+                    <div class="arena-img-item active"><img src="arena1.png" alt="Arena Image 1"></div>
+                    <div class="arena-img-item"><img src="LzPvP.png" alt="Arena Image 2"></div>
+                    <div class="arena-img-item"><img src="LzPvP.png" alt="Arena Image 3"></div>
+                </div>
 
-        <div class="rule-card">
-            <h2 data-i18n="title_disclaimer">ファンサイトとしての免責事項</h2>
-            <ul class="rule-list">
-                <li>
-                    <span data-i18n="disclaimer_1">最新の公式ルールはDiscordをご確認ください</span>
-                    <span class="rule-desc" data-i18n="disclaimer_1_desc">当サイトは非公式ファンサイトです。最新情報や詳細な罰則規定は公式Discordのルールチャンネルが優先されます。</span>
-                </li>
-            </ul>
-        </div>
+                <div class="arena-nav">
+                    <button class="prev-arrow" onclick="moveSlide(-1)">＜</button>
+                    <button class="next-arrow" onclick="moveSlide(1)">＞</button>
+                </div>
 
-	<div class="footer-action">
-           <a href="../" class="back-home" data-i18n="back_btn">← ホームサイトに戻る</a>
+                <div class="arena-dots">
+                    <span class="dot active" onclick="currentSlide(0)"></span>
+                    <span class="dot" onclick="currentSlide(1)"></span>
+                    <span class="dot" onclick="currentSlide(2)"></span>
+                </div>
+            </div>
+            
+            <div class="arena-footer">
+                <p class="arena-desc" data-i18n="arena_desc">
+                    <strong>1.21対応</strong>の迫力あるPvPが楽しめる、最新鋭の特設アリーナ。多彩なステージ環境を駆使して、王座を目指せ。
+                </p>
+            </div>
         </div>
-    </div>
+    </section>
+
+    <footer>
+        <p data-i18n="footer_text">このサイトは非公式に制作されたファンサイトです。</p>
+        <div style="margin-top: 10px; font-size: 0.75rem; color: rgba(255, 255, 255, 0.3);">
+            <p style="font-family: 'Space Grotesk', sans-serif;">This site uses AI to support its multilingual translations.</p>
+            <p style="font-family: 'Noto Sans JP', sans-serif; margin-top: 2px;">※当サイトは多言語翻訳のサポートにAIを使用しています。</p>
+        </div>
+    </footer>
 
     <script>
         const translations = {
             ja: {
-                subtitle: "快適なプレイのためにルールを守りましょう",
-                title_basic: "基本ルール",
-                basic_1: "他プレイヤーへのリスペクトを忘れずに",
-                basic_1_desc: "煽りや暴言など、相手を不快にさせる行為は控えましょう。",
-                basic_2: "不具合の悪用禁止",
-                basic_2_desc: "バグを見つけた場合は、悪用せず速やかに運営へ報告してください。",
-                basic_3: "チャットの連投やスパムの禁止",
-                basic_3_desc: "チャット欄を荒らす行為は他のプレイヤーの迷惑になります。",
-                title_forbidden: "絶対禁止事項",
-                forbid_1: "不正ツールの使用（チート行為）",
-                forbid_1_desc: "Hackクライアントや、ゲームを有利に進める非公式MODの使用は永久BANの対象です。",
-                forbid_2: "意図的なチーミング（ソロ戦など）",
-                forbid_2_desc: "個人戦の対戦モードにおいて、他プレイヤーと共謀して戦うことは禁止です。",
-                forbid_3: "他サーバーの宣伝行為",
-                forbid_3_desc: "無許可で他のマイクラサーバーやDiscordサーバーの宣伝を行うこと。",
-                title_disclaimer: "ファンサイトとしての免責事項",
-                disclaimer_1: "最新の公式ルールはDiscordをご確認ください",
-                disclaimer_1_desc: "当サイトは非公式ファンサイトです。最新情報や詳細な罰則規定は公式Discordのルールチャンネルが優先されます。",
-                back_btn: "← ホームサイトに戻る"
+                unofficial: "UNOFFICIAL",
+                subtitle: "非公式ファンサイト",
+                card1_title: "ガチ推し特設ページ",
+                card1_desc: "LzPvPサーバーの魅力や愛を詰め込んだ専用ページです。",
+                card2_title: "サーバーの掟 (Rules)",
+                card2_desc: "皆が楽しく遊ぶための基本ルールと禁止事項の確認はこちら。",
+                points_title: "LzPvPのここが推せる",
+                point_1: "1.21の最新技術で対戦が楽しめる",
+                point_2: "多彩なKitが用意されている",
+                point_3: "現在テスター募集中",
+                arena_title: "アリーナ紹介",
+                arena_desc: "<strong>1.21対応</strong>の迫力あるPvPが楽しめる、最新鋭の特設アリーナ。多彩なステージ環境を駆使して、王座を目指せ。",
+                footer_text: "このサイトは非公式に制作されたファンサイトです。",
+                loading: "読み込み中...",
+                click_copy: "CLICK TO COPY IP",
+                discord: "公式Discord",
+                rule: "ルール確認",
+                love_page: "ガチ推し特設"
             },
             en: {
-                subtitle: "Please follow the rules for a comfortable gameplay experience.",
-                title_basic: "Basic Rules",
-                basic_1: "Respect other players",
-                basic_1_desc: "Please refrain from toxic behavior, insults, and anything that makes others uncomfortable.",
-                basic_2: "No exploit of bugs/glitches",
-                basic_2_desc: "If you find a bug, do not exploit it and report it to staff immediately.",
-                basic_3: "No spamming in chat",
-                basic_3_desc: "Flooding the chat is annoying to other players.",
-                title_forbidden: "Forbidden Actions",
-                forbid_1: "Use of unfair tools (Cheating)",
-                forbid_1_desc: "The use of Hack clients or unauthorized mods that give an advantage will result in a permanent ban.",
-                forbid_2: "Intentional Teaming in solo modes",
-                forbid_2_desc: "Teaming up with other players in solo battle modes is strictly prohibited.",
-                forbid_3: "Advertising other servers",
-                forbid_3_desc: "Promoting other Minecraft or Discord servers without permission is not allowed.",
-                title_disclaimer: "Disclaimer as a Fan Site",
-                disclaimer_1: "Please check Discord for the latest official rules",
-                disclaimer_1_desc: "This is an unofficial fan site. The official Discord rule channel always takes priority for the latest info.",
-                back_btn: "← Back to Home"
+                unofficial: "UNOFFICIAL",
+                subtitle: "UNOFFICIAL FAN SITE",
+                card1_title: "Special Fan Page",
+                card1_desc: "A dedicated page filled with love and the charm of the LzPvP server.",
+                card2_title: "Server Rules",
+                card2_desc: "Click here to check the basic rules and forbidden actions for a better experience.",
+                points_title: "Why we love LzPvP",
+                point_1: "Enjoy battles with 1.21 technology",
+                point_2: "Various Kits are available",
+                point_3: "Now looking for testers",
+                arena_title: "Arena Showcase",
+                arena_desc: "A state-of-the-art special arena where you can enjoy intense PvP compatible with <strong>1.21</strong>. Aim for the throne by mastering various stage environments.",
+                footer_text: "This is an unofficial fan site.",
+                loading: "Loading...",
+                click_copy: "CLICK TO COPY IP",
+                discord: "Official Discord",
+                rule: "Rules",
+                love_page: "Special Fan Page"
             }
         };
 
@@ -364,5 +200,6 @@
             }
         });
     </script>
+    <script src="script.js"></script>
 </body>
 </html>

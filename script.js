@@ -3,7 +3,8 @@
 // --- 🌐 多言語対応 (i18n) の設定 ---
 const translations = {
     ja: {
-        loading: "読み込み中...",
+         visit_count: "📊 累計訪問数: <span id='visit-count' style='color: var(--primary); font-weight: bold;'>読み込み中...</span>"
+	loading: "読み込み中...",
 	unofficial: "非公式",
         click_copy: "クリックしてIPをコピー",
         discord: "公式Discord",
@@ -18,7 +19,8 @@ const translations = {
         footer_text: "このサイトは非公式に制作されたファンサイトです。"
     },
     en: {
-        loading: "Loading...",
+        visit_count: "📊 Total Visits: <span id='visit-count' style='color: var(--primary); font-weight: bold;'>Loading...</span>"
+	loading: "Loading...",
 	unofficial: "UNOFFICIAL",
         click_copy: "CLICK TO COPY IP",
         discord: "Official Discord",
