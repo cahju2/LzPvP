@@ -1,180 +1,96 @@
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LzPvP | Unofficial Fansite</title>
-    
-    <link rel="icon" href="LzPvP.png" type="image/png">
-    
-    <meta property="og:title" content="【非公式】LzPvP | ファンサイト">
-    <meta property="og:description" content="1.21対応の最新PvPサーバー「LzPvP」の非公式ファンサイト。">
-    <meta property="og:type" content="website">
-    <meta property="og:image" content="https://cahju2.github.io/LzPvP/LzPvP.png">
-    <meta name="twitter:card" content="summary">
-
-    <link rel="stylesheet" href="style.css">
+    <title>Rules | LzPvP Fansite</title>
+    <link rel="icon" href="../LzPvP.png" type="image/png">
+    <link rel="stylesheet" href="../style.css">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        .back-link { display: inline-block; margin-bottom: 20px; color: var(--text-muted); text-decoration: none; font-size: 0.9rem; transition: 0.2s; }
+        .back-link:hover { color: var(--primary); }
+    </style>
 </head>
 <body>
-
     <div class="bg-glow"></div>
 
     <header>
         <div class="logo">
-            <img src="LzPvP.png" alt="" class="logo-img">
+            <img src="../LzPvP.png" alt="" class="logo-img">
             <span>LzPvP</span>
-            <small data-i18n="unofficial">UNOFFICIAL</small>
+            <small>RULES</small>
         </div>
-        
         <div class="header-right">
             <div class="lang-switcher">
                 <span id="lang-jp" class="lang-btn active" onclick="switchLang('ja')">JP</span>
                 <span class="lang-divider">/</span>
                 <span id="lang-en" class="lang-btn" onclick="switchLang('en')">EN</span>
             </div>
-            <div class="status-tag" id="player-count" data-i18n="loading">読み込み中...</div>
         </div>
     </header>
 
-    <main class="hero">
-        <div class="hero-content">
-            <h1 class="main-title">LzPvP</h1>
-            
-            <div class="ip-card" onclick="copyIP()" id="ip-val">
-                <span class="ip-text">LzPvP.xyz</span>
-                <span class="copy-hint" data-i18n="click_copy">CLICK TO COPY IP</span>
-            </div>
-            
-            <div class="links-group">
-                <a href="https://discord.gg/gYcNZgGmkE" class="btn btn-primary" target="_blank" rel="noopener noreferrer" data-i18n="discord">
-                    公式Discord
-                </a>
-                <a href="rule/" class="btn btn-secondary" data-i18n="rule">
-                    ルール確認
-                </a>
-                <a href="love/" class="btn btn-secondary" data-i18n="love_page">
-                    ガチ推し特設
-                </a>
-                <a href="https://github.com/cahju2/LzPvP" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">
-                    GitHub
-                </a>
-            </div>
+    <main class="content-section" style="margin-top: 40px;">
+        <a href="../" class="back-link">← ホームに戻る</a>
+        
+        <div class="glass-card">
+            <h2 data-i18n="title">サーバーの掟 (Rules)</h2>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px;" data-i18n="desc">
+                皆が楽しく安全に遊ぶための基本ルールです。違反者は処罰対象になる可能性があります。
+            </p>
+
+            <ul class="styled-list">
+                <li>
+                    <strong style="color: var(--text-main);" data-i18n="r1_t">チート・不正クライアントの禁止</strong>
+                    <p style="font-size: 0.85rem; margin-top: 4px;" data-i18n="r1_d">ハッククライアント、マクロ、その他不公平なアドバンテージを得るツールの使用は即BAN対象です。</p>
+                </li>
+                <li>
+                    <strong style="color: var(--text-main);" data-i18n="r2_t">暴言・嫌がらせの禁止</strong>
+                    <p style="font-size: 0.85rem; margin-top: 4px;" data-i18n="r2_d">チャットでの過度な暴言、煽り、個人情報の特定や晒し行為は絶対にNGです。</p>
+                </li>
+                <li>
+                    <strong style="color: var(--text-main);" data-i18n="r3_t">グリッチ・バグの悪用禁止</strong>
+                    <p style="font-size: 0.85rem; margin-top: 4px;" data-i18n="r3_d">ゲームバランスを崩すバグを発見した場合は、速やかに運営に報告してください。</p>
+                </li>
+                <li>
+                    <strong style="color: var(--text-main);" data-i18n="r4_t">その他運営の指示に従うこと</strong>
+                    <p style="font-size: 0.85rem; margin-top: 4px;" data-i18n="r4_d">快適なプレイ環境維持のため、上記にない場合でも運営の判断で制限を行うことがあります。</p>
+                </li>
+            </ul>
         </div>
     </main>
 
-    <section class="content-section">
-        <div class="mc-server-card">
-            <img src="LzPvP.png" alt="Server Icon" class="mc-icon" id="mc-icon">
-            <div class="mc-info">
-                <div class="mc-top-row">
-                    <span class="mc-name">LzPvP</span>
-                    <span class="mc-players" id="mc-players-card">0/0</span>
-                </div>
-                <div class="mc-motd" id="mc-motd"></div>
-            </div>
-            <div class="mc-ping" id="mc-ping"></div>
-        </div>
-    </section>
-
-    <section class="content-section">
-        <div class="glass-card">
-            <h2 data-i18n="points_title">LzPvPのここが推せる</h2>
-            <ul class="styled-list">
-                <li data-i18n="point_1">1.21の最新技術で対戦が楽しめる</li>
-                <li data-i18n="point_2">多彩なKitが用意されている</li>
-                <li data-i18n="point_3">現在テスター募集中</li>
-            </ul>
-        </div>
-    </section>
-
-    <section class="content-section">
-        <div class="arena-card">
-            <div class="arena-header">
-                <div class="arena-title">
-                    <span class="arena-icon">⚔️</span>
-                    <h3 data-i18n="arena_title">アリーナ紹介</h3>
-                </div>
-                <span class="arena-subtitle" id="arena-stage-title">PvP Stage #1</span>
-            </div>
-            
-            <div class="arena-slider">
-                <div class="arena-img-list">
-                    <div class="arena-img-item active"><img src="arena1.png" alt="Arena Image 1"></div>
-                    <div class="arena-img-item"><img src="LzPvP.png" alt="Arena Image 2"></div>
-                    <div class="arena-img-item"><img src="LzPvP.png" alt="Arena Image 3"></div>
-                </div>
-
-                <div class="arena-nav">
-                    <button class="prev-arrow" onclick="moveSlide(-1)">＜</button>
-                    <button class="next-arrow" onclick="moveSlide(1)">＞</button>
-                </div>
-
-                <div class="arena-dots">
-                    <span class="dot active" onclick="currentSlide(0)"></span>
-                    <span class="dot" onclick="currentSlide(1)"></span>
-                    <span class="dot" onclick="currentSlide(2)"></span>
-                </div>
-            </div>
-            
-            <div class="arena-footer">
-                <p class="arena-desc" data-i18n="arena_desc">
-                    <strong>1.21対応</strong>の迫力あるPvPが楽しめる、最新鋭の特設アリーナ。多彩なステージ環境を駆使して、王座を目指せ。
-                </p>
-            </div>
-        </div>
-    </section>
-
     <footer>
         <p data-i18n="footer_text">このサイトは非公式に制作されたファンサイトです。</p>
-        <div style="margin-top: 10px; font-size: 0.75rem; color: rgba(255, 255, 255, 0.3);">
-            <p style="font-family: 'Space Grotesk', sans-serif;">This site uses AI to support its multilingual translations.</p>
-            <p style="font-family: 'Noto Sans JP', sans-serif; margin-top: 2px;">※当サイトは多言語翻訳のサポートにAIを使用しています。</p>
-        </div>
     </footer>
 
     <script>
         const translations = {
             ja: {
-                unofficial: "UNOFFICIAL",
-                subtitle: "非公式ファンサイト",
-                card1_title: "ガチ推し特設ページ",
-                card1_desc: "LzPvPサーバーの魅力や愛を詰め込んだ専用ページです。",
-                card2_title: "サーバーの掟 (Rules)",
-                card2_desc: "皆が楽しく遊ぶための基本ルールと禁止事項の確認はこちら。",
-                points_title: "LzPvPのここが推せる",
-                point_1: "1.21の最新技術で対戦が楽しめる",
-                point_2: "多彩なKitが用意されている",
-                point_3: "現在テスター募集中",
-                arena_title: "アリーナ紹介",
-                arena_desc: "<strong>1.21対応</strong>の迫力あるPvPが楽しめる、最新鋭の特設アリーナ。多彩なステージ環境を駆使して、王座を目指せ。",
-                footer_text: "このサイトは非公式に制作されたファンサイトです。",
-                loading: "読み込み中...",
-                click_copy: "CLICK TO COPY IP",
-                discord: "公式Discord",
-                rule: "ルール確認",
-                love_page: "ガチ推し特設"
+                title: "サーバーの掟 (Rules)",
+                desc: "皆が楽しく安全に遊ぶための基本ルールです。違反者は処罰対象になる可能性があります。",
+                r1_t: "チート・不正クライアントの禁止",
+                r1_d: "ハッククライアント、マクロ、その他不公平なアドバンテージを得るツールの使用は即BAN対象です。",
+                r2_t: "暴言・嫌がらせの禁止",
+                r2_d: "チャットでの過度な暴言、煽り、個人情報の特定や晒し行為は絶対にNGです。",
+                r3_t: "グリッチ・バグの悪用禁止",
+                r3_d: "ゲームバランスを崩すバグを発見した場合は、速やかに運営に報告してください。",
+                r4_t: "その他運営の指示に従うこと",
+                r4_d: "快適なプレイ環境維持のため、上記にない場合でも運営の判断で制限を行うことがあります。",
+                footer_text: "このサイトは非公式に制作されたファンサイトです。"
             },
             en: {
-                unofficial: "UNOFFICIAL",
-                subtitle: "UNOFFICIAL FAN SITE",
-                card1_title: "Special Fan Page",
-                card1_desc: "A dedicated page filled with love and the charm of the LzPvP server.",
-                card2_title: "Server Rules",
-                card2_desc: "Click here to check the basic rules and forbidden actions for a better experience.",
-                points_title: "Why we love LzPvP",
-                point_1: "Enjoy battles with 1.21 technology",
-                point_2: "Various Kits are available",
-                point_3: "Now looking for testers",
-                arena_title: "Arena Showcase",
-                arena_desc: "A state-of-the-art special arena where you can enjoy intense PvP compatible with <strong>1.21</strong>. Aim for the throne by mastering various stage environments.",
-                footer_text: "This is an unofficial fan site.",
-                loading: "Loading...",
-                click_copy: "CLICK TO COPY IP",
-                discord: "Official Discord",
-                rule: "Rules",
-                love_page: "Special Fan Page"
+                title: "Server Rules",
+                desc: "Basic rules for everyone to have fun and play safely. Violators may be punished.",
+                r1_t: "Prohibition of cheats and illegal clients",
+                r1_d: "Use of hack clients, macros, or other tools to gain an unfair advantage will result in an immediate BAN.",
+                r2_t: "Prohibition of abusive language and harassment",
+                r2_d: "Excessive abuse in chat, trolling, and doxxing are strictly prohibited.",
+                r3_t: "Prohibition of exploiting glitches and bugs",
+                r3_d: "If you find a bug that breaks game balance, please report it to the admin immediately.",
+                r4_t: "Follow other admin instructions",
+                r4_d: "To maintain a comfortable environment, admins may apply restrictions not listed above at their discretion.",
+                footer_text: "This is an unofficial fan site."
             }
         };
 
@@ -182,24 +98,16 @@
             document.getElementById('lang-jp').classList.toggle('active', lang === 'ja');
             document.getElementById('lang-en').classList.toggle('active', lang === 'en');
             
-            const elements = document.querySelectorAll('[data-i18n]');
-            elements.forEach(el => {
+            document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
-                if (translations[lang][key]) {
-                    el.innerHTML = translations[lang][key];
-                }
+                if (translations[lang][key]) el.innerHTML = translations[lang][key];
             });
         }
 
         document.addEventListener('DOMContentLoaded', () => {
             const userLang = navigator.language || navigator.userLanguage;
-            if (!userLang.startsWith('ja')) {
-                switchLang('en');
-            } else {
-                switchLang('ja');
-            }
+            switchLang(userLang.startsWith('ja') ? 'ja' : 'en');
         });
     </script>
-    <script src="script.js"></script>
 </body>
 </html>

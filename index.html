@@ -47,18 +47,10 @@
             </div>
             
             <div class="links-group">
-                <a href="https://discord.gg/gYcNZgGmkE" class="btn btn-primary" target="_blank" rel="noopener noreferrer" data-i18n="discord">
-                    公式Discord
-                </a>
-                <a href="rule/" class="btn btn-secondary" data-i18n="rule">
-                    ルール確認
-                </a>
-                <a href="love/" class="btn btn-secondary" data-i18n="love_page">
-                    ガチ推し特設
-                </a>
-                <a href="https://github.com/cahju2/LzPvP" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">
-                    GitHub
-                </a>
+                <a href="https://discord.gg/gYcNZgGmkE" class="btn btn-primary" target="_blank" rel="noopener noreferrer" data-i18n="discord">公式Discord</a>
+                <a href="rule/" class="btn btn-secondary" data-i18n="rule">ルール確認</a>
+                <a href="love/" class="btn btn-secondary" data-i18n="love_page">ガチ推し特設</a>
+                <a href="https://github.com/cahju2/LzPvP" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">GitHub</a>
             </div>
         </div>
     </main>
@@ -136,38 +128,18 @@
     <script>
         const translations = {
             ja: {
-                unofficial: "UNOFFICIAL",
-                subtitle: "非公式ファンサイト",
-                points_title: "LzPvPのここが推せる",
-                point_1: "1.21の最新技術で対戦が楽しめる",
-                point_2: "多彩なKitが用意されている",
-                point_3: "現在テスター募集中",
-                arena_title: "アリーナ紹介",
-                arena_desc: "<strong>1.21対応</strong>の迫力あるPvPが楽しめる、最新鋭の特設アリーナ。多彩なステージ環境を駆使して、王座を目指せ。",
-                footer_text: "このサイトは非公式に制作されたファンサイトです。",
-                loading: "読み込み中...",
-                click_copy: "CLICK TO COPY IP",
-                discord: "公式Discord",
-                rule: "ルール確認",
-                love_page: "ガチ推し特設"
-                // 🚨 キット関連の翻訳データも削除したぜ！
+                unofficial: "UNOFFICIAL", points_title: "LzPvPのここが推せる",
+                point_1: "1.21の最新技術で対戦が楽しめる", point_2: "多彩なKitが用意されている", point_3: "現在テスター募集中",
+                arena_title: "アリーナ紹介", arena_desc: "<strong>1.21対応</strong>の迫力あるPvPが楽しめる、最新鋭の特設アリーナ。多彩なステージ環境を駆使して、王座を目指せ。",
+                footer_text: "このサイトは非公式に制作されたファンサイトです。", loading: "読み込み中...",
+                click_copy: "CLICK TO COPY IP", discord: "公式Discord", rule: "ルール確認", love_page: "ガチ推し特設"
             },
             en: {
-                unofficial: "UNOFFICIAL",
-                subtitle: "UNOFFICIAL FAN SITE",
-                points_title: "Why we love LzPvP",
-                point_1: "Enjoy battles with 1.21 technology",
-                point_2: "Various Kits are available",
-                point_3: "Now looking for testers",
-                arena_title: "Arena Showcase",
-                arena_desc: "A state-of-the-art special arena where you can enjoy intense PvP compatible with <strong>1.21</strong>. Aim for the throne by mastering various stage environments.",
-                footer_text: "This is an unofficial fan site.",
-                loading: "Loading...",
-                click_copy: "CLICK TO COPY IP",
-                discord: "Official Discord",
-                rule: "Rules",
-                love_page: "Special Fan Page"
-                // 🚨 キット関連の翻訳データも削除したぜ！
+                unofficial: "UNOFFICIAL", points_title: "Why we love LzPvP",
+                point_1: "Enjoy battles with 1.21 technology", point_2: "Various Kits are available", point_3: "Now looking for testers",
+                arena_title: "Arena Showcase", arena_desc: "A state-of-the-art special arena where you can enjoy intense PvP compatible with <strong>1.21</strong>. Aim for the throne by mastering various stage environments.",
+                footer_text: "This is an unofficial fan site.", loading: "Loading...",
+                click_copy: "CLICK TO COPY IP", discord: "Official Discord", rule: "Rules", love_page: "Special Fan Page"
             }
         };
 
@@ -175,74 +147,45 @@
             document.getElementById('lang-jp').classList.toggle('active', lang === 'ja');
             document.getElementById('lang-en').classList.toggle('active', lang === 'en');
             
-            const elements = document.querySelectorAll('[data-i18n]');
-            elements.forEach(el => {
+            document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
-                if (translations[lang][key]) {
-                    el.innerHTML = translations[lang][key];
-                }
+                if (translations[lang][key]) el.innerHTML = translations[lang][key];
             });
         }
 
         document.addEventListener('DOMContentLoaded', () => {
             const userLang = navigator.language || navigator.userLanguage;
-            if (!userLang.startsWith('ja')) {
-                switchLang('en');
-            } else {
-                switchLang('ja');
-            }
+            switchLang(userLang.startsWith('ja') ? 'ja' : 'en');
         });
-    </script>
-    <script src="script.js"></script>
 
-    <script>
-        let slideIndex = 0; // 現在表示している画像の番号（0からスタート）
-        showSlides(slideIndex); // 初期表示
+        // スライダー処理
+        let slideIndex = 0;
+        showSlides(slideIndex);
 
-        // 「＜」または「＞」ボタンが押されたときの処理
-        function moveSlide(n) {
-            showSlides(slideIndex += n);
-        }
+        function moveSlide(n) { showSlides(slideIndex += n); }
+        function currentSlide(n) { showSlides(slideIndex = n); }
 
-        // 下の「ドット（●）」が押されたときの処理
-        function currentSlide(n) {
-            showSlides(slideIndex = n);
-        }
-
-        // 画像を表示・切り替えるメインの処理
         function showSlides(n) {
             const slides = document.getElementsByClassName("arena-img-item");
             const dots = document.getElementsByClassName("dot");
-            const titleEl = document.getElementById("arena-stage-title"); // タイトルを書き換える場所
+            const titleEl = document.getElementById("arena-stage-title");
 
-            // 画像が1枚もないなら何もしない
-            if (slides.length === 0) return;
+            if (!slides.length) return;
+            if (n >= slides.length) slideIndex = 0;
+            if (n < 0) slideIndex = slides.length - 1;
 
-            // 最後の画像で「＞」を押したら最初の画像に戻る
-            if (n >= slides.length) { slideIndex = 0 }
-            // 最初の画像で「＜」を押したら最後の画像に行く
-            if (n < 0) { slideIndex = slides.length - 1 }
+            for (let i = 0; i < slides.length; i++) slides[i].classList.remove("active");
+            for (let i = 0; i < dots.length; i++) dots[i].classList.remove("active");
 
-            // 全ての画像を一旦非表示にする
-            for (let i = 0; i < slides.length; i++) {
-                slides[i].classList.remove("active");
-            }
-            // 全てのドットの「active」クラスを消す
-            for (let i = 0; i < dots.length; i++) {
-                dots[i].classList.remove("active");
-            }
-
-            // 現在の画像とドットに「active」クラスをつけて表示する
             slides[slideIndex].classList.add("active");
             dots[slideIndex].classList.add("active");
 
-            // 画像の「alt」属性の文字をタイトルに反映させる
             const currentImg = slides[slideIndex].getElementsByTagName('img')[0];
             if (currentImg && titleEl) {
-                // altが設定されていればそれを、なければ「PvP Stage #X」と表示するぜ
                 titleEl.innerText = currentImg.alt || `PvP Stage #${slideIndex + 1}`;
             }
         }
     </script>
-    </body>
+    <script src="script.js"></script>
+</body>
 </html>
