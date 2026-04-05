@@ -206,6 +206,62 @@ header {
 .arena-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; }
 .arena-desc strong { color: var(--primary); }
 
+/* Kit一覧のグリッドレイアウト */
+.kit-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.kit-item {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border);
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.9rem;
+    color: var(--text-main);
+    cursor: help;
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+.kit-item:hover {
+    border-color: var(--primary);
+    background: rgba(0, 242, 254, 0.03);
+}
+
+/* ツールチップ（ホバー詳細） */
+.kit-item::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(9, 12, 16, 0.95);
+    border: 1px solid var(--primary);
+    color: var(--text-main);
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-family: 'Noto Sans JP', sans-serif;
+    white-space: normal;
+    width: 220px;
+    text-align: left;
+    line-height: 1.4;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    z-index: 100;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+}
+
+.kit-item:hover::after {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-5px);
+}
+
 footer { width: 100%; text-align: center; padding: 40px 20px; border-top: 1px solid var(--border); color: #444; font-size: 0.8rem; margin-top: 30px; }
 
 @media (max-width: 768px) {
@@ -214,4 +270,10 @@ footer { width: 100%; text-align: center; padding: 40px 20px; border-top: 1px so
     .ip-card { padding: 15px 30px; }
     .arena-slider { height: 180px; }
     header { flex-direction: column; gap: 15px; }
+}
+
+@media (max-width: 480px) {
+    .kit-grid {
+        grid-template-columns: 1fr;
+    }
 }

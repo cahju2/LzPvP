@@ -71,6 +71,31 @@
 
     <section class="content-section">
         <div class="glass-card">
+            <h2 data-i18n="kits_title">実装予定のKit一覧</h2>
+            <p style="color: var(--text-muted); font-size: 0.8rem; text-align: center; margin-bottom: 5px;">
+                名前にマウスを乗せると詳細が表示されるでい！
+            </p>
+            <p style="color: rgba(255, 255, 255, 0.3); font-size: 0.7rem; text-align: center; margin-bottom: 20px;">
+                ※あんまりKitに詳しくないので、でたらめな情報があるかもしれません。許してね！
+            </p>
+            <div class="kit-grid">
+                <div class="kit-item" data-tooltip="1.21の「メイス」を主軸にしたKit。落下距離に応じた超絶ダメージが魅力。">Mace</div>
+                <div class="kit-item" data-tooltip="1.21新武器「メイス」をダイヤ装備で戦うKit。高所からのスマッシュを狙え！">DiamondMace</div>
+                <div class="kit-item" data-tooltip="エンドクリスタルを爆破させて戦う超高火力戦。一瞬のミスが即死に繋がる。">Crystal</div>
+                <div class="kit-item" data-tooltip="ダイヤ装備環境でのエンドクリスタル戦。少し耐久力が上がったクリスタルPvP。">DiamondCrystal</div>
+                <div class="kit-item" data-tooltip="PvP Tiers公式ルールのPot。最高峰のスピード感とプレイヤースキルが要求される。">PotPvPTiers</div>
+                <div class="kit-item" data-tooltip="MCTiers基準のUHC。限られた回復リソースを奪い合う、超シビアな戦闘。">UHCMCTiers</div>
+                <div class="kit-item" data-tooltip="自然回復なし環境。金のリンゴや溶岩バケツを駆使する総合格闘技。">UHC</div>
+                <div class="kit-item" data-tooltip="斧と盾を駆使する1.9以降の基本PvP。一撃の重さと盾の崩し合いが鍵。">Axe</div>
+                <div class="kit-item" data-tooltip="ネザライト装備にスプラッシュポーション（回復）を大量に積んだ激しい消耗戦。">NethPot</div>
+                <div class="kit-item" data-tooltip="ネザライト装備にポーションを積んだ戦闘。泥沼の耐久ポーション戦が展開される。">Namanko</div>
+                <div class="kit-item" data-tooltip="相手を場外に叩き落とす、純粋なCPSとエイムの勝負！">Sumo (予定)</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="glass-card">
             <h2 data-i18n="points_title">LzPvPのここが推せる</h2>
             <ul class="styled-list">
                 <li data-i18n="point_1">1.21の最新技術で対戦が楽しめる</li>
@@ -92,9 +117,9 @@
             
             <div class="arena-slider">
                 <div class="arena-img-list">
-                    <div class="arena-img-item active"><img src="arena1.png" alt="Arena Image 1"></div>
-                    <div class="arena-img-item"><img src="LzPvP.png" alt="Arena Image 2"></div>
-                    <div class="arena-img-item"><img src="humisan.png" alt="Arena Image 3"></div>
+                    <div class="arena-img-item active"><img src="arena1.png" alt="BasketBall Stadium (by @ピーマン)"></div>
+                    <div class="arena-img-item"><img src="arena2.png" alt="PokemonSumo (by @Sekai)"></div>
+                    <div class="arena-img-item"><img src="arena3.png" alt="Jungle Sanctuary Ruins (by @guraqy)"></div>
                 </div>
 
                 <div class="arena-nav">
@@ -113,6 +138,9 @@
                 <p class="arena-desc" data-i18n="arena_desc">
                     <strong>1.21対応</strong>の迫力あるPvPが楽しめる、最新鋭の特設アリーナ。多彩なステージ環境を駆使して、王座を目指せ。
                 </p>
+                <p style="color: rgba(255, 255, 255, 0.4); font-size: 0.75rem; margin-top: 10px; text-align: center;">
+                    💡 サーバーの公式Discordでは、機能やKitの提案を募集中だそうだぜ！
+                </p>
             </div>
         </div>
     </section>
@@ -121,21 +149,21 @@
         <p data-i18n="footer_text">このサイトは非公式に制作されたファンサイトです。</p>
         <div style="margin-top: 10px; font-size: 0.75rem; color: rgba(255, 255, 255, 0.3);">
             <p style="font-family: 'Space Grotesk', sans-serif;">This site uses AI to support its multilingual translations.</p>
-            <p style="font-family: 'Noto Sans JP', sans-serif; margin-top: 2px;">※当サイトは多言語翻訳のサポートにAIを使用しています。</p>
+            <p style="font-family: 'Noto Sans JP', sans-serif; margin-top: 2px;">※当サイトは多言語翻訳のサポートに AI を使用しています。</p>
         </div>
     </footer>
 
     <script>
         const translations = {
             ja: {
-                unofficial: "UNOFFICIAL", points_title: "LzPvPのここが推せる",
+                unofficial: "UNOFFICIAL", points_title: "LzPvPのここが推せる", kits_title: "実装予定のKit一覧",
                 point_1: "1.21の最新技術で対戦が楽しめる", point_2: "多彩なKitが用意されている", point_3: "現在テスター募集中",
                 arena_title: "アリーナ紹介", arena_desc: "<strong>1.21対応</strong>の迫力あるPvPが楽しめる、最新鋭の特設アリーナ。多彩なステージ環境を駆使して、王座を目指せ。",
                 footer_text: "このサイトは非公式に制作されたファンサイトです。", loading: "読み込み中...",
                 click_copy: "CLICK TO COPY IP", discord: "公式Discord", rule: "ルール確認", love_page: "ガチ推し特設"
             },
             en: {
-                unofficial: "UNOFFICIAL", points_title: "Why we love LzPvP",
+                unofficial: "UNOFFICIAL", points_title: "Why we love LzPvP", kits_title: "Planned Kits",
                 point_1: "Enjoy battles with 1.21 technology", point_2: "Various Kits are available", point_3: "Now looking for testers",
                 arena_title: "Arena Showcase", arena_desc: "A state-of-the-art special arena where you can enjoy intense PvP compatible with <strong>1.21</strong>. Aim for the throne by mastering various stage environments.",
                 footer_text: "This is an unofficial fan site.", loading: "Loading...",
