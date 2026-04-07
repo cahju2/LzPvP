@@ -1,7 +1,9 @@
+// 新しいサーバーIP
+const SERVER_IP = "as.lzpvp.xyz";
+
 // IPをクリップボードにコピー
 function copyIP() {
-    const ip = "LzPvP.xyz";
-    navigator.clipboard.writeText(ip).then(() => {
+    navigator.clipboard.writeText(SERVER_IP).then(() => {
         const hint = document.querySelector('.copy-hint');
         if (hint) {
             const original = hint.innerText;
@@ -19,8 +21,7 @@ function copyIP() {
 
 // サーバーのステータス取得 (MCSrvStat API)
 function updateServerStatus() {
-    const serverIP = "LzPvP.xyz";
-    fetch(`https://api.mcsrvstat.us/3/${serverIP}`)
+    fetch(`https://api.mcsrvstat.us/3/${SERVER_IP}`)
         .then(res => res.json())
         .then(data => {
             const countEl = document.getElementById('player-count');
@@ -39,7 +40,6 @@ function updateServerStatus() {
                     motdEl.innerText = data.motd.clean[0] || '';
                 }
                 
-                // 仮でPingを表示（APIからは直接取れない場合があるからおまけ）
                 if (pingEl) pingEl.innerText = "Connected";
             } else {
                 if (countEl) countEl.innerText = "Offline";

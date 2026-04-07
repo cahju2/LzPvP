@@ -32,23 +32,13 @@
             100% { transform: translate(var(--dx), var(--dy)) rotate(var(--dr)); opacity: 0; }
         }
 
-        /* 💎 シンプルで高級感のあるホバーアニメーション */
-        .ip-card, .btn, .kit-item {
-            position: relative;
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
-            border: 1px solid rgba(0, 255, 255, 0.1) !important;
+        /* IPカードの基本スタイル */
+        .ip-card {
+            cursor: pointer;
+            transition: transform 0.1s ease;
         }
-
-        /* マウスを乗せたときだけ、ふわっと浮き上がってネオンが濃くなる */
-        .ip-card:hover, .btn:hover, .kit-item:hover {
-            transform: translateY(-3px);
-            border-color: rgba(0, 255, 255, 0.5) !important;
-            box-shadow: 0 8px 20px rgba(0, 255, 255, 0.15) !important;
-            background: rgba(0, 255, 255, 0.05) !important;
-        }
-
-        .ip-card:active, .btn:active, .kit-item:active {
-            transform: translateY(-1px);
+        .ip-card:active {
+            transform: scale(0.98);
         }
     </style>
 </head>
@@ -78,7 +68,7 @@
             <h1 class="main-title">LzPvP</h1>
             
             <div class="ip-card" onclick="copyIP(); playPopSound(); spawnConfetti(event);" id="ip-val">
-                <span class="ip-text">LzPvP.xyz</span>
+                <span class="ip-text">as.lzpvp.xyz</span>
                 <span class="copy-hint" data-i18n="click_copy">CLICK TO COPY IP</span>
             </div>
             
@@ -123,16 +113,6 @@
                 <div class="kit-item" data-tooltip="ネザライト装備にスプラッシュポーション大量積みの戦い。">NethPot</div>
                 <div class="kit-item" data-tooltip="相手を場外に叩き落とす勝負！">Sumo (予定)</div>
             </div>
-        </div>
-    </section>
-
-    <section class="content-section">
-        <div class="glass-card">
-            <h2 data-i18n="points_title">LzPvPのここが推せる</h2>
-            <ul class="styled-list">
-                <li data-i18n="point_1">1.21の最新技術で対戦が楽しめる</li>
-                <li data-i18n="point_2">多彩なKitが用意されている</li>
-            </ul>
         </div>
     </section>
 
@@ -195,12 +175,10 @@
             } catch (e) { console.log('Audio error:', e); }
         }
 
-        // 💥 クラッカー紙吹雪（中心から弾けるように修正）
+        // 💥 クラッカー紙吹雪
         function spawnConfetti(e) {
             const colors = ['#00ffff', '#ff00ff', '#ffff00', '#ff0000', '#00ff00', '#ffffff'];
-            const count = 20;
-            
-            // 要素の中心座標を取得
+            const count = 25;
             const rect = e.currentTarget.getBoundingClientRect();
             const startX = rect.left + (rect.width / 2) + window.scrollX;
             const startY = rect.top + (rect.height / 2) + window.scrollY;
@@ -211,15 +189,12 @@
                 piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
                 piece.style.left = startX + 'px';
                 piece.style.top = startY + 'px';
-                
                 const angle = Math.random() * Math.PI * 2;
                 const distance = 40 + Math.random() * 80;
                 const rotation = (Math.random() * 720) - 360;
-                
                 piece.style.setProperty('--dx', Math.cos(angle) * distance + 'px');
                 piece.style.setProperty('--dy', Math.sin(angle) * distance + 'px');
                 piece.style.setProperty('--dr', rotation + 'deg');
-                
                 document.body.appendChild(piece);
                 setTimeout(() => piece.remove(), 700);
             }
