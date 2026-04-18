@@ -1,4 +1,4 @@
-// 新しいサーバーIP
+// サーバーIPの定義
 const SERVER_IP = "as.lzpvp.xyz";
 
 // IPをクリップボードにコピー
@@ -53,9 +53,9 @@ function updateServerStatus() {
         });
 }
 
-// 読み込み時に実行
+// 読み込み時に初期実行とタイマー設定
 document.addEventListener('DOMContentLoaded', () => {
     updateServerStatus();
-    // 5分おきに更新
+    // 5分おきに自動更新
     setInterval(updateServerStatus, 1000 * 60 * 5);
 });

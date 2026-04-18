@@ -32,7 +32,26 @@
             100% { transform: translate(var(--dx), var(--dy)) rotate(var(--dr)); opacity: 0; }
         }
 
-        /* IPカードの基本スタイル */
+        /* 🎊 復活記念バッジ */
+        .revival-badge {
+            display: inline-block;
+            background: linear-gradient(90deg, #00ffff, #ff00ff);
+            color: #000;
+            font-weight: bold;
+            font-size: 0.8rem;
+            padding: 4px 16px;
+            border-radius: 20px;
+            margin-bottom: 12px;
+            letter-spacing: 0.5px;
+            animation: pulse-badge 2s infinite;
+        }
+        @keyframes pulse-badge {
+            0% { opacity: 0.8; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
+            100% { opacity: 0.8; transform: scale(1); }
+        }
+
+        /* IPカード */
         .ip-card {
             cursor: pointer;
             transition: transform 0.1s ease;
@@ -65,6 +84,8 @@
 
     <main class="hero">
         <div class="hero-content">
+            <div class="revival-badge" data-i18n="revival_msg">LzPvP復活おめ！</div>
+            
             <h1 class="main-title">LzPvP</h1>
             
             <div class="ip-card" onclick="copyIP(); playPopSound(); spawnConfetti(event);" id="ip-val">
@@ -121,16 +142,17 @@
     </footer>
 
     <script>
+        // 翻訳データ
         const translations = {
             ja: {
-                unofficial: "UNOFFICIAL", points_title: "LzPvPのここが推せる", kits_title: "実装予定のKit一覧",
-                point_1: "1.21の最新技術で対戦が楽しめる", point_2: "多彩なKitが用意されている",
+                revival_msg: "LzPvP復活おめ！",
+                unofficial: "UNOFFICIAL", kits_title: "実装予定のKit一覧",
                 footer_text: "このサイトは非公式に制作されたファンサイトです。", loading: "読み込み中...",
                 click_copy: "CLICK TO COPY IP", discord: "公式Discord", rule: "ルール確認", love_page: "ガチ推し特設"
             },
             en: {
-                unofficial: "UNOFFICIAL", points_title: "Why we love LzPvP", kits_title: "Planned Kits",
-                point_1: "Enjoy battles with 1.21 technology", point_2: "Various Kits are available",
+                revival_msg: "LzPvP IS BACK!",
+                unofficial: "UNOFFICIAL", kits_title: "Planned Kits",
                 footer_text: "This is an unofficial fan site.", loading: "Loading...",
                 click_copy: "CLICK TO COPY IP", discord: "Official Discord", rule: "Rules", love_page: "Special Fan Page"
             }
@@ -150,7 +172,7 @@
             switchLang(userLang.startsWith('ja') ? 'ja' : 'en');
         });
 
-        // 🔊 クラッカー音（パシッ）
+        // クラッカー音
         function playPopSound() {
             try {
                 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -175,7 +197,7 @@
             } catch (e) { console.log('Audio error:', e); }
         }
 
-        // 💥 クラッカー紙吹雪
+        // 紙吹雪
         function spawnConfetti(e) {
             const colors = ['#00ffff', '#ff00ff', '#ffff00', '#ff0000', '#00ff00', '#ffffff'];
             const count = 25;
