@@ -17,44 +17,44 @@
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
-        /* 🎉 クラッカー（紙吹雪） */
+        /* 🎉 紙吹雪（カラーを戻して少し華やかに） */
         .confetti-piece {
             position: absolute;
-            width: 6px;
-            height: 6px;
+            width: 5px;
+            height: 5px;
             pointer-events: none;
             z-index: 9999;
             animation: confetti-fall 0.7s ease-out forwards;
-            opacity: 1;
         }
         @keyframes confetti-fall {
             0% { transform: translate(0, 0) rotate(0deg); opacity: 1; }
             100% { transform: translate(var(--dx), var(--dy)) rotate(var(--dr)); opacity: 0; }
         }
 
-        /* 🎊 復活記念バッジ */
-        .revival-badge {
+        /* 🎊 正式リリースバッジ（ネオンラインで質感を出す） */
+        .release-badge {
             display: inline-block;
-            background: linear-gradient(90deg, #00ffff, #ff00ff);
-            color: #000;
+            border: 1px solid rgba(0, 255, 255, 0.4);
+            background: rgba(0, 255, 255, 0.05);
+            color: #00ffff;
+            font-size: 0.75rem;
             font-weight: bold;
-            font-size: 0.8rem;
             padding: 4px 16px;
-            border-radius: 20px;
-            margin-bottom: 12px;
-            letter-spacing: 0.5px;
-            animation: pulse-badge 2s infinite;
-        }
-        @keyframes pulse-badge {
-            0% { opacity: 0.8; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.05); }
-            100% { opacity: 0.8; transform: scale(1); }
+            border-radius: 50px;
+            margin-bottom: 15px;
+            letter-spacing: 0.1em;
+            text-shadow: 0 0 8px rgba(0, 255, 255, 0.5);
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.1);
         }
 
         /* IPカード */
         .ip-card {
             cursor: pointer;
-            transition: transform 0.1s ease;
+            transition: all 0.2s ease;
+        }
+        .ip-card:hover {
+            border-color: rgba(0, 255, 255, 0.5) !important;
+            background: rgba(0, 255, 255, 0.05) !important;
         }
         .ip-card:active {
             transform: scale(0.98);
@@ -84,24 +84,27 @@
 
     <main class="hero">
         <div class="hero-content">
-            <div class="revival-badge" data-i18n="revival_msg">LzPvP復活おめ！</div>
+            <!-- 祝！正式リリース -->
+            <div class="release-badge" data-i18n="release_msg">OFFICIAL RELEASE</div>
             
             <h1 class="main-title">LzPvP</h1>
             
+            <!-- IPを as. なしに修正 -->
             <div class="ip-card" onclick="copyIP(); playPopSound(); spawnConfetti(event);" id="ip-val">
-                <span class="ip-text">as.lzpvp.xyz</span>
+                <span class="ip-text">lzpvp.xyz</span>
                 <span class="copy-hint" data-i18n="click_copy">CLICK TO COPY IP</span>
             </div>
             
             <div class="links-group">
-                <a href="https://discord.gg/gYcNZgGmkE" class="btn btn-primary" target="_blank" rel="noopener noreferrer" data-i18n="discord">公式Discord</a>
-                <a href="rule/" class="btn btn-secondary" data-i18n="rule">ルール確認</a>
-                <a href="love/" class="btn btn-secondary" data-i18n="love_page">ガチ推し特設</a>
+                <a href="https://discord.gg/gYcNZgGmkE" class="btn btn-primary" target="_blank" rel="noopener noreferrer" data-i18n="discord">Official Discord</a>
+                <a href="rule/" class="btn btn-secondary" data-i18n="rule">Rules</a>
+                <a href="love/" class="btn btn-secondary" data-i18n="love_page">Special Fan Page</a>
                 <a href="https://github.com/cahju2/LzPvP" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">GitHub</a>
             </div>
         </div>
     </main>
 
+    <!-- サーバーステータス -->
     <section class="content-section">
         <div class="mc-server-card">
             <img src="LzPvP.png" alt="Server Icon" class="mc-icon" id="mc-icon">
@@ -116,43 +119,40 @@
         </div>
     </section>
 
+    <!-- Kit一覧 -->
     <section class="content-section">
         <div class="glass-card">
-            <h2 data-i18n="kits_title">実装予定のKit一覧</h2>
-            <p style="color: var(--text-muted); font-size: 0.8rem; text-align: center; margin-bottom: 5px;">
-                名前にマウスを乗せると詳細が表示されるでい！
-            </p>
+            <h2 data-i18n="kits_title">Available Kits</h2>
             <div class="kit-grid">
-                <div class="kit-item" data-tooltip="1.21の「メイス」を主軸にしたKit。">Mace</div>
-                <div class="kit-item" data-tooltip="1.21新武器「メイス」をダイヤ装備で戦うKit。">DiamondMace</div>
-                <div class="kit-item" data-tooltip="エンドクリスタルを爆破させて戦う超高火力戦。">Crystal</div>
-                <div class="kit-item" data-tooltip="ダイヤ装備環境でのエンドクリスタル戦。">DiamondCrystal</div>
-                <div class="kit-item" data-tooltip="PvP Tiers公式ルールのPot。">PotPvPTiers</div>
-                <div class="kit-item" data-tooltip="MCTiers基準のUHC。">UHCMCTiers</div>
-                <div class="kit-item" data-tooltip="自然回復なし環境。金のリンゴや溶岩バケツを駆使。">UHC</div>
-                <div class="kit-item" data-tooltip="斧と盾を駆使する1.9以降の基本PvP。">Axe</div>
-                <div class="kit-item" data-tooltip="ネザライト装備にスプラッシュポーション大量積みの戦い。">NethPot</div>
-                <div class="kit-item" data-tooltip="相手を場外に叩き落とす勝負！">Sumo (予定)</div>
+                <div class="kit-item" data-tooltip="1.21 Mace focus.">Mace</div>
+                <div class="kit-item" data-tooltip="Diamond set with Mace.">DiamondMace</div>
+                <div class="kit-item" data-tooltip="End Crystal combat.">Crystal</div>
+                <div class="kit-item" data-tooltip="Diamond set Crystal.">DiamondCrystal</div>
+                <div class="kit-item" data-tooltip="PvP Tiers Pot.">PotPvPTiers</div>
+                <div class="kit-item" data-tooltip="MCTiers UHC.">UHCMCTiers</div>
+                <div class="kit-item" data-tooltip="Classic UHC.">UHC</div>
+                <div class="kit-item" data-tooltip="Axe & Shield.">Axe</div>
+                <div class="kit-item" data-tooltip="Netherite Pot.">NethPot</div>
+                <div class="kit-item" data-tooltip="Ring out match.">Sumo</div>
             </div>
         </div>
     </section>
 
     <footer>
-        <p data-i18n="footer_text">このサイトは非公式に制作されたファンサイトです。</p>
+        <p data-i18n="footer_text">This site is an unofficial fan site.</p>
     </footer>
 
     <script>
-        // 翻訳データ
         const translations = {
             ja: {
-                revival_msg: "LzPvP復活おめ！",
-                unofficial: "UNOFFICIAL", kits_title: "実装予定のKit一覧",
+                release_msg: "🎉 正式リリース 🎉",
+                unofficial: "非公式", kits_title: "実装済みのKit一覧",
                 footer_text: "このサイトは非公式に制作されたファンサイトです。", loading: "読み込み中...",
-                click_copy: "CLICK TO COPY IP", discord: "公式Discord", rule: "ルール確認", love_page: "ガチ推し特設"
+                click_copy: "クリックでコピー", discord: "公式Discord", rule: "ルール確認", love_page: "ガチ推し特設"
             },
             en: {
-                revival_msg: "LzPvP IS BACK!",
-                unofficial: "UNOFFICIAL", kits_title: "Planned Kits",
+                release_msg: "OFFICIAL RELEASE",
+                unofficial: "UNOFFICIAL", kits_title: "Available Kits",
                 footer_text: "This is an unofficial fan site.", loading: "Loading...",
                 click_copy: "CLICK TO COPY IP", discord: "Official Discord", rule: "Rules", love_page: "Special Fan Page"
             }
@@ -172,35 +172,33 @@
             switchLang(userLang.startsWith('ja') ? 'ja' : 'en');
         });
 
-        // クラッカー音
         function playPopSound() {
             try {
                 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                const bufferSize = audioCtx.sampleRate * 0.08;
+                const bufferSize = audioCtx.sampleRate * 0.06;
                 const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
                 const data = buffer.getChannelData(0);
-                for (let i = 0; i < bufferSize; i++) { data[i] = (Math.random() * 2 - 1) * 0.4; }
+                for (let i = 0; i < bufferSize; i++) { data[i] = (Math.random() * 2 - 1) * 0.3; }
                 const noise = audioCtx.createBufferSource();
                 noise.buffer = buffer;
                 const filter = audioCtx.createBiquadFilter();
-                filter.type = 'bandpass';
-                filter.frequency.setValueAtTime(1200, audioCtx.currentTime);
+                filter.type = 'highpass';
+                filter.frequency.setValueAtTime(1000, audioCtx.currentTime);
                 const gainNode = audioCtx.createGain();
-                gainNode.gain.setValueAtTime(0.3, audioCtx.currentTime);
-                gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.08);
+                gainNode.gain.setValueAtTime(0.2, audioCtx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.06);
                 noise.connect(filter);
                 filter.connect(gainNode);
                 gainNode.connect(audioCtx.destination);
                 noise.start();
-                noise.stop(audioCtx.currentTime + 0.08);
-                setTimeout(() => audioCtx.close(), 150);
-            } catch (e) { console.log('Audio error:', e); }
+                noise.stop(audioCtx.currentTime + 0.06);
+                setTimeout(() => audioCtx.close(), 120);
+            } catch (e) {}
         }
 
-        // 紙吹雪
         function spawnConfetti(e) {
-            const colors = ['#00ffff', '#ff00ff', '#ffff00', '#ff0000', '#00ff00', '#ffffff'];
-            const count = 25;
+            const colors = ['#00ffff', '#ff00ff', '#ffffff', '#ffff00'];
+            const count = 20;
             const rect = e.currentTarget.getBoundingClientRect();
             const startX = rect.left + (rect.width / 2) + window.scrollX;
             const startY = rect.top + (rect.height / 2) + window.scrollY;
@@ -212,11 +210,10 @@
                 piece.style.left = startX + 'px';
                 piece.style.top = startY + 'px';
                 const angle = Math.random() * Math.PI * 2;
-                const distance = 40 + Math.random() * 80;
-                const rotation = (Math.random() * 720) - 360;
+                const distance = 40 + Math.random() * 70;
                 piece.style.setProperty('--dx', Math.cos(angle) * distance + 'px');
                 piece.style.setProperty('--dy', Math.sin(angle) * distance + 'px');
-                piece.style.setProperty('--dr', rotation + 'deg');
+                piece.style.setProperty('--dr', (Math.random() * 360) + 'deg');
                 document.body.appendChild(piece);
                 setTimeout(() => piece.remove(), 700);
             }
