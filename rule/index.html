@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rules | LzPvP Fansite</title>
+    <link rel="icon" href="../LzPvP.png" type="image/png">
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        .back-link { display: inline-block; margin-bottom: 20px; color: var(--text-muted); text-decoration: none; font-size: 0.9rem; transition: 0.2s; }
+        .back-link:hover { color: var(--primary); }
+    </style>
+</head>
+<body>
+    <div class="bg-glow"></div>
+
+    <header>
+        <div class="logo">
+            <img src="../LzPvP.png" alt="" class="logo-img">
+            <span>LzPvP</span>
+            <small>RULES</small>
+        </div>
+        <div class="header-right">
+            <div class="lang-switcher">
+                <span id="lang-jp" class="lang-btn active" onclick="switchLang('ja')">JP</span>
+                <span class="lang-divider">/</span>
+                <span id="lang-en" class="lang-btn" onclick="switchLang('en')">EN</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="content-section" style="margin-top: 40px;">
+        <a href="../" class="back-link">← ホームに戻る</a>
+        
+        <div class="glass-card">
+            <h2 data-i18n="title">サーバーの掟 (Rules)</h2>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px;" data-i18n="desc">
+                皆が楽しく安全に遊ぶための基本ルールです。違反者は処罰対象になる可能性があります。
+            </p>
+
+            <ul class="styled-list">
+                <li>
+                    <strong style="color: var(--text-main);" data-i18n="r1_t">チート・不正クライアントの禁止</strong>
+                    <p style="font-size: 0.85rem; margin-top: 4px;" data-i18n="r1_d">ハッククライアント、マクロ、その他不公平なアドバンテージを得るツールの使用は即BAN対象です。</p>
+                </li>
+                <li>
+                    <strong style="color: var(--text-main);" data-i18n="r2_t">暴言・嫌がらせの禁止</strong>
+                    <p style="font-size: 0.85rem; margin-top: 4px;" data-i18n="r2_d">チャットでの過度な暴言、煽り、個人情報の特定や晒し行為は絶対にNGです。</p>
+                </li>
+                <li>
+                    <strong style="color: var(--text-main);" data-i18n="r3_t">グリッチ・バグの悪用禁止</strong>
+                    <p style="font-size: 0.85rem; margin-top: 4px;" data-i18n="r3_d">ゲームバランスを崩すバグを発見した場合は、速やかに運営に報告してください。</p>
+                </li>
+                <li>
+                    <strong style="color: var(--text-main);" data-i18n="r4_t">その他運営の指示に従うこと</strong>
+                    <p style="font-size: 0.85rem; margin-top: 4px;" data-i18n="r4_d">快適なプレイ環境維持のため、上記にない場合でも運営の判断で制限を行うことがあります。</p>
+                </li>
+            </ul>
+        </div>
+    </main>
+
+    <footer>
+        <p data-i18n="footer_text">このサイトは非公式に制作されたファンサイトです。</p>
+    </footer>
+
+    <script>
+        const translations = {
+            ja: {
+                title: "サーバーの掟 (Rules)",
+                desc: "皆が楽しく安全に遊ぶための基本ルールです。違反者は処罰対象になる可能性があります。",
+                r1_t: "チート・不正クライアントの禁止",
+                r1_d: "ハッククライアント、マクロ、その他不公平なアドバンテージを得るツールの使用は即BAN対象です。",
+                r2_t: "暴言・嫌がらせの禁止",
+                r2_d: "チャットでの過度な暴言、煽り、個人情報の特定や晒し行為は絶対にNGです。",
+                r3_t: "グリッチ・バグの悪用禁止",
+                r3_d: "ゲームバランスを崩すバグを発見した場合は、速やかに運営に報告してください。",
+                r4_t: "その他運営の指示に従うこと",
+                r4_d: "快適なプレイ環境維持のため、上記にない場合でも運営の判断で制限を行うことがあります。",
+                footer_text: "このサイトは非公式に制作されたファンサイトです。"
+            },
+            en: {
+                title: "Server Rules",
+                desc: "Basic rules for everyone to have fun and play safely. Violators may be punished.",
+                r1_t: "Prohibition of cheats and illegal clients",
+                r1_d: "Use of hack clients, macros, or other tools to gain an unfair advantage will result in an immediate BAN.",
+                r2_t: "Prohibition of abusive language and harassment",
+                r2_d: "Excessive abuse in chat, trolling, and doxxing are strictly prohibited.",
+                r3_t: "Prohibition of exploiting glitches and bugs",
+                r3_d: "If you find a bug that breaks game balance, please report it to the admin immediately.",
+                r4_t: "Follow other admin instructions",
+                r4_d: "To maintain a comfortable environment, admins may apply restrictions not listed above at their discretion.",
+                footer_text: "This is an unofficial fan site."
+            }
+        };
+
+        function switchLang(lang) {
+            document.getElementById('lang-jp').classList.toggle('active', lang === 'ja');
+            document.getElementById('lang-en').classList.toggle('active', lang === 'en');
+            
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang][key]) el.innerHTML = translations[lang][key];
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const userLang = navigator.language || navigator.userLanguage;
+            switchLang(userLang.startsWith('ja') ? 'ja' : 'en');
+        });
+    </script>
+</body>
+</html>

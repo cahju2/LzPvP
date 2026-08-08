@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LzPvP | Unofficial Fansite</title>
+    
+    <link rel="icon" href="LzPvP.png" type="image/png">
+    
+    <meta property="og:title" content="【非公式】LzPvP | ファンサイト">
+    <meta property="og:description" content="1.21対応の最新PvPサーバー「LzPvP」の非公式ファンサイト。">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://cahju2.github.io/LzPvP/LzPvP.png">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* 🎉 紙吹雪（カラーを戻して少し華やかに） */
+        .confetti-piece {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            pointer-events: none;
+            z-index: 9999;
+            animation: confetti-fall 0.7s ease-out forwards;
+        }
+        @keyframes confetti-fall {
+            0% { transform: translate(0, 0) rotate(0deg); opacity: 1; }
+            100% { transform: translate(var(--dx), var(--dy)) rotate(var(--dr)); opacity: 0; }
+        }
+
+        /* IPカード */
+        .ip-card {
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .ip-card:hover {
+            border-color: rgba(0, 255, 255, 0.5) !important;
+            background: rgba(0, 255, 255, 0.05) !important;
+        }
+        .ip-card:active {
+            transform: scale(0.98);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-glow"></div>
+
+    <header>
+        <div class="logo">
+            <img src="LzPvP.png" alt="" class="logo-img">
+            <span>LzPvP</span>
+            <small data-i18n="unofficial">UNOFFICIAL</small>
+        </div>
+        
+        <div class="header-right">
+            <div class="lang-switcher">
+                <span id="lang-jp" class="lang-btn active" onclick="switchLang('ja')">JP</span>
+                <span class="lang-divider">/</span>
+                <span id="lang-en" class="lang-btn" onclick="switchLang('en')">EN</span>
+            </div>
+            <div class="status-tag" id="player-count" data-i18n="loading">読み込み中...</div>
+        </div>
+    </header>
+
+    <main class="hero">
+        <div class="hero-content">
+            <h1 class="main-title">LzPvP</h1>
+            
+            <!-- IPを as. なしに修正 -->
+            <div class="ip-card" onclick="copyIP(); playPopSound(); spawnConfetti(event);" id="ip-val">
+                <span class="ip-text">lzpvp.xyz</span>
+                <span class="copy-hint" data-i18n="click_copy">CLICK TO COPY IP</span>
+            </div>
+            
+            <div class="links-group">
+                <a href="https://discord.gg/gYcNZgGmkE" class="btn btn-primary" target="_blank" rel="noopener noreferrer" data-i18n="discord">Discord</a>
+                <a href="rule/" class="btn btn-secondary" data-i18n="rule">Rules</a>
+                <a href="love/" class="btn btn-secondary" data-i18n="love_page">Special Fan Page</a>
+                <a href="https://github.com/cahju2/LzPvP" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">GitHub</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- サーバーステータス -->
+    <section class="content-section">
+        <div class="mc-server-card">
+            <img src="LzPvP.png" alt="Server Icon" class="mc-icon" id="mc-icon">
+            <div class="mc-info">
+                <div class="mc-top-row">
+                    <span class="mc-name">LzPvP</span>
+                    <span class="mc-players" id="mc-players-card">0/0</span>
+                </div>
+                <div class="mc-motd" id="mc-motd"></div>
+            </div>
+            <div class="mc-ping" id="mc-ping"></div>
+        </div>
+    </section>
+
+    <!-- Kit一覧 -->
+    <section class="content-section">
+        <div class="glass-card">
+            <h2 data-i18n="kits_title">Available Kits</h2>
+            <div class="kit-grid">
+                <div class="kit-item" data-tooltip="1.21 Mace focus.">Mace</div>
+                <div class="kit-item" data-tooltip="Diamond set with Mace.">DiamondMace</div>
+                <div class="kit-item" data-tooltip="End Crystal combat.">Crystal</div>
+                <div class="kit-item" data-tooltip="Diamond set Crystal.">DiamondCrystal</div>
+                <div class="kit-item" data-tooltip="PvP Tiers Pot.">PotPvPTiers</div>
+                <div class="kit-item" data-tooltip="MCTiers UHC.">UHCMCTiers</div>
+                <div class="kit-item" data-tooltip="Classic UHC.">UHC</div>
+                <div class="kit-item" data-tooltip="Axe & Shield.">Axe</div>
+                <div class="kit-item" data-tooltip="Netherite Pot.">NethPot</div>
+                <div class="kit-item" data-tooltip="Ring out match.">Sumo</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- バレーボール -->
+    <section class="content-section">
+        <div class="glass-card feature-card">
+            <h2 data-i18n="volleyball_title">Volleyball</h2>
+            <p class="feature-desc" data-i18n="volleyball_desc">
+                バレーボールモード。人数制限なし、20点先取！砂の範囲内に入ることでキューに参加でき、両チームに人が揃うと試合が開始されます。
+            </p>
+            <div class="volleyball-gallery">
+                <img src="volleyball1.png" alt="Volleyball Match 1" class="volleyball-img" onclick="openLightbox('volleyball1.png')">
+                <img src="volleyball2.png" alt="Volleyball Match 2" class="volleyball-img" onclick="openLightbox('volleyball2.png')">
+            </div>
+        </div>
+    </section>
+
+    <!-- リレー（中継地点選択） -->
+    <section class="content-section">
+        <div class="glass-card feature-card">
+            <h2 data-i18n="relay_title">Relay Server</h2>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px;" data-i18n="relay_desc">
+                ゲーム内で <code>/relay</code> コマンドを使って中継サーバーを選択できます。以下から最適なものを選びましょう。
+            </p>
+            <img src="relay.png" alt="Relay Selection GUI" class="relay-shot" onclick="openLightbox('relay.png')">
+            <p style="color: var(--text-muted); font-size: 0.75rem; margin-bottom: 18px;" data-i18n="relay_imghint">画像をクリックで拡大表示</p>
+            <div class="relay-grid">
+                <div class="relay-card" onclick="selectRelay('tokyo')">
+                    <div class="relay-info">
+                        <span class="relay-name">Tokyo</span>
+                        <span class="relay-sub">tyo.lzpvp.xyz</span>
+                    </div>
+                </div>
+                <div class="relay-card" onclick="selectRelay('osaka')">
+                    <div class="relay-info">
+                        <span class="relay-name">Osaka</span>
+                        <span class="relay-sub">osk.lzpvp.xyz</span>
+                    </div>
+                </div>
+                <div class="relay-card" onclick="selectRelay('tcpshield')">
+                    <div class="relay-info">
+                        <span class="relay-name">TCP Shield</span>
+                        <span class="relay-sub">ts.lzpvp.xyz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- トーナメント -->
+    <section class="content-section">
+        <div class="glass-card feature-card">
+            <div class="feature-header">
+                <h2 data-i18n="tournament_title">Tournament</h2>
+            </div>
+            <p class="feature-desc" data-i18n="tournament_desc">
+                ユーザー自身がトーナメントを作成・参加できる機能。Bracket形式でPvPバトルを競おう！
+            </p>
+            <a href="https://tourn.lzpvp.xyz/" class="btn btn-primary tournament-btn" target="_blank" rel="noopener noreferrer" data-i18n="tournament_btn">
+                トーナメントを作成する
+            </a>
+        </div>
+    </section>
+
+    <!-- ピアノ -->
+    <section class="content-section">
+        <div class="glass-card feature-card">
+            <h2 data-i18n="piano_title">Piano</h2>
+            <p class="feature-desc" data-i18n="piano_desc">
+                ゲーム内でピアノを演奏できる機能！実際に音を奏でることができます。
+            </p>
+            <div class="piano-gallery">
+                <img src="piano.png" alt="Piano" class="piano-img" onclick="openLightbox('piano.png')">
+            </div>
+            <div class="piano-steps">
+                <div class="piano-step">
+                    <span class="step-num">1</span>
+                    <span data-i18n="piano_step1">マイクラ内でピアノの近くへ行き <code>/pianoqueue</code> と入力</span>
+                </div>
+                <div class="piano-step">
+                    <span class="step-num">2</span>
+                    <span data-i18n="piano_step2">チャットに「queueに参加」ボタンを押す</span>
+                </div>
+                <div class="piano-step">
+                    <span class="step-num">3</span>
+                    <span data-i18n="piano_step3">「承諾」がチャットに出るのを待つ</span>
+                </div>
+                <div class="piano-step">
+                    <span class="step-num">4</span>
+                    <span data-i18n="piano_step4">セッション開始時にチャットにトークンが出力されるのでコピー</span>
+                </div>
+                <div class="piano-step">
+                    <span class="step-num">5</span>
+                    <span data-i18n="piano_step5">下のボタンからピアノページを開きトークンを入力して演奏開始！</span>
+                </div>
+            </div>
+            <a href="https://piano.lzpvp.xyz/" class="btn btn-primary piano-btn" target="_blank" rel="noopener noreferrer" data-i18n="piano_btn">
+                ピアノを弾く
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        <p data-i18n="footer_text">This site is an unofficial fan site.</p>
+    </footer>
+
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <img src="" alt="" class="lightbox-img" id="lightbox-img">
+    </div>
+
+    <script>
+        const translations = {
+            ja: {
+                unofficial: "非公式", kits_title: "実装済みのKit一覧",
+                footer_text: "このサイトは非公式に制作されたファンサイトです。", loading: "読み込み中...",
+                click_copy: "クリックでコピー", discord: "Discord", rule: "ルール確認", love_page: "ガチ推し特設",
+                volleyball_title: "バレーボール",
+                volleyball_desc: "何人でも参加可能で、20点先取です！砂の範囲に入ることでqueueに参加でき、両チームに人がいると試合が開始されます。",
+                relay_title: "Relay サーバー",
+                relay_desc: "ゲーム内で <code>/relay</code> コマンドを使って中継サーバーを選択できます。以下から最適なものを選びましょう。",
+                relay_imghint: "画像をクリックで拡大表示",
+                tournament_title: "トーナメント",
+                tournament_desc: "ユーザー自身がトーナメントを作成・参加できる機能。Bracket形式でPvPバトルを競おう！",
+                tournament_btn: "トーナメントを作成する",
+                piano_title: "ピアノ",
+                piano_desc: "ゲーム内でピアノを演奏できる機能！実際に音を奏でることができます。",
+                piano_step1: "マイクラ内でピアノの近くへ行き <code>/pianoqueue</code> と入力",
+                piano_step2: "チャットに「queueに参加」ボタンを押す",
+                piano_step3: "「承諾」がチャットに出るのを待つ",
+                piano_step4: "セッション開始時にチャットにトークンが出力されるのでコピー",
+                piano_step5: "下のボタンからピアノページを開きトークンを入力して演奏開始！",
+                piano_btn: "ピアノを弾く"
+            },
+            en: {
+                unofficial: "UNOFFICIAL", kits_title: "Available Kits",
+                footer_text: "This is an unofficial fan site.", loading: "Loading...",
+                click_copy: "CLICK TO COPY IP", discord: "Discord", rule: "Rules", love_page: "Special Fan Page",
+                volleyball_title: "Volleyball",
+                volleyball_desc: "Anyone can join, first to 20 points wins! Enter the sand area to join the queue, and the match starts when both teams have players.",
+                relay_title: "Relay Server",
+                relay_desc: "You can select a relay server using the <code>/relay</code> command in-game. Choose the best one from below.",
+                relay_imghint: "Click the image to enlarge",
+                tournament_title: "Tournament",
+                tournament_desc: "A feature where users can create and join tournaments. Compete in PvP battles with bracket format!",
+                tournament_btn: "Create Tournament",
+                piano_title: "Piano",
+                piano_desc: "A feature that lets you play piano in-game! You can actually produce music.",
+                piano_step1: "Go near a piano in Minecraft and type <code>/pianoqueue</code>",
+                piano_step2: "Press the \"Join Queue\" button that appears in chat",
+                piano_step3: "Wait for \"Accept\" to appear in chat",
+                piano_step4: "A token will be output in chat when the session starts - copy it",
+                piano_step5: "Open the piano page from the button below, enter the token and start playing!",
+                piano_btn: "Play Piano"
+            }
+        };
+
+        function switchLang(lang) {
+            document.getElementById('lang-jp').classList.toggle('active', lang === 'ja');
+            document.getElementById('lang-en').classList.toggle('active', lang === 'en');
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang][key]) el.innerHTML = translations[lang][key];
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const userLang = navigator.language || navigator.userLanguage;
+            switchLang(userLang.startsWith('ja') ? 'ja' : 'en');
+        });
+
+        function playPopSound() {
+            try {
+                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                const bufferSize = audioCtx.sampleRate * 0.06;
+                const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+                const data = buffer.getChannelData(0);
+                for (let i = 0; i < bufferSize; i++) { data[i] = (Math.random() * 2 - 1) * 0.3; }
+                const noise = audioCtx.createBufferSource();
+                noise.buffer = buffer;
+                const filter = audioCtx.createBiquadFilter();
+                filter.type = 'highpass';
+                filter.frequency.setValueAtTime(1000, audioCtx.currentTime);
+                const gainNode = audioCtx.createGain();
+                gainNode.gain.setValueAtTime(0.2, audioCtx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.06);
+                noise.connect(filter);
+                filter.connect(gainNode);
+                gainNode.connect(audioCtx.destination);
+                noise.start();
+                noise.stop(audioCtx.currentTime + 0.06);
+                setTimeout(() => audioCtx.close(), 120);
+            } catch (e) {}
+        }
+
+        function spawnConfetti(e) {
+            const colors = ['#00ffff', '#ff00ff', '#ffffff', '#ffff00'];
+            const count = 20;
+            const rect = e.currentTarget.getBoundingClientRect();
+            const startX = rect.left + (rect.width / 2) + window.scrollX;
+            const startY = rect.top + (rect.height / 2) + window.scrollY;
+
+            for (let i = 0; i < count; i++) {
+                const piece = document.createElement('div');
+                piece.className = 'confetti-piece';
+                piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                piece.style.left = startX + 'px';
+                piece.style.top = startY + 'px';
+                const angle = Math.random() * Math.PI * 2;
+                const distance = 40 + Math.random() * 70;
+                piece.style.setProperty('--dx', Math.cos(angle) * distance + 'px');
+                piece.style.setProperty('--dy', Math.sin(angle) * distance + 'px');
+                piece.style.setProperty('--dr', (Math.random() * 360) + 'deg');
+                document.body.appendChild(piece);
+                setTimeout(() => piece.remove(), 700);
+            }
+        }
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
