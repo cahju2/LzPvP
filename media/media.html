@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Rank | LzPvP Fansite</title>
+    <link rel="icon" href="../LzPvP.png" type="image/png">
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        .back-link { display: inline-block; margin-bottom: 20px; color: var(--text-muted); text-decoration: none; font-size: 0.9rem; transition: 0.2s; }
+        .back-link:hover { color: var(--primary); }
+        .media-header { text-align: center; margin-bottom: 40px; }
+        .media-header h1 { font-family: 'Space Grotesk', sans-serif; font-size: 2.5rem; margin-bottom: 10px; color: var(--primary); }
+        .media-list { display: flex; flex-direction: column; gap: 15px; }
+        .media-card {
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+        .media-card:hover {
+            border-color: var(--primary);
+            background: rgba(0, 242, 254, 0.03);
+            transform: translateY(-2px);
+        }
+        .media-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(0, 242, 254, 0.3);
+            flex-shrink: 0;
+        }
+        .media-info { display: flex; flex-direction: column; gap: 4px; }
+        .media-name { font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem; font-weight: 700; color: var(--text-main); }
+        .media-sub { font-size: 0.8rem; color: var(--text-muted); }
+        .media-youtube { font-size: 0.8rem; color: var(--primary); }
+    </style>
+</head>
+<body>
+    <div class="bg-glow"></div>
+
+    <header>
+        <div class="logo">
+            <img src="../LzPvP.png" alt="" class="logo-img">
+            <span>LzPvP</span>
+            <small>MEDIA</small>
+        </div>
+        <div class="header-right">
+            <div class="lang-switcher">
+                <span id="lang-jp" class="lang-btn active" onclick="switchLang('ja')">JP</span>
+                <span class="lang-divider">/</span>
+                <span id="lang-en" class="lang-btn" onclick="switchLang('en')">EN</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="content-section" style="margin-top: 40px;">
+        <a href="../" class="back-link">← ホームに戻る</a>
+
+        <div class="media-header">
+            <h1 data-i18n="head_t">Media Rank 保持者</h1>
+            <p style="color: var(--text-muted);" data-i18n="head_d">LzPvPの魅力を広めてくれているクリエイターたち</p>
+        </div>
+
+        <div class="media-list" id="media-list"></div>
+    </main>
+
+    <footer>
+        <p data-i18n="footer_text">このサイトは非公式に制作されたファンサイトです。</p>
+    </footer>
+
+    <script>
+        const mediaHolders = [
+            {
+                name: "Lasutar",
+                icon: "media_lasutar.png",
+                youtube: "https://www.youtube.com/@Lasutar_mc",
+                subJa: "YouTube クリエイター",
+                subEn: "YouTube Creator"
+            }
+        ];
+
+        const translations = {
+            ja: {
+                head_t: "Media Rank 保持者",
+                head_d: "LzPvPの魅力を広めてくれているクリエイターたち",
+                footer_text: "このサイトは非公式に制作されたファンサイトです。",
+                youtube_label: "YouTube チャンネル"
+            },
+            en: {
+                head_t: "Media Rank Holders",
+                head_d: "Creators who help spread the appeal of LzPvP",
+                footer_text: "This is an unofficial fan site.",
+                youtube_label: "YouTube Channel"
+            }
+        };
+
+        function renderHolders(lang) {
+            const list = document.getElementById('media-list');
+            list.innerHTML = mediaHolders.map(h => `
+                <a href="${h.youtube}" class="media-card" target="_blank" rel="noopener noreferrer">
+                    <img src="${h.icon}" alt="${h.name}" class="media-icon">
+                    <div class="media-info">
+                        <span class="media-name">${h.name}</span>
+                        <span class="media-sub">${lang === 'ja' ? h.subJa : h.subEn}</span>
+                        <span class="media-youtube">${translations[lang].youtube_label} ↗</span>
+                    </div>
+                </a>
+            `).join('');
+        }
+
+        function switchLang(lang) {
+            document.getElementById('lang-jp').classList.toggle('active', lang === 'ja');
+            document.getElementById('lang-en').classList.toggle('active', lang === 'en');
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang][key]) el.innerHTML = translations[lang][key];
+            });
+            renderHolders(lang);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const userLang = navigator.language || navigator.userLanguage;
+            switchLang(userLang.startsWith('ja') ? 'ja' : 'en');
+        });
+    </script>
+</body>
+</html>
