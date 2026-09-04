@@ -16,28 +16,6 @@
         .pro-card {
             border: 1px solid rgba(0, 255, 255, 0.3);
             background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(0,255,255,0.02));
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-        }
-
-        /* 💪 隠しマッチョ：手元の macho.png を参照 */
-        .hidden-macho {
-            position: absolute;
-            bottom: -150px;
-            right: 10px;
-            width: 150px;
-            height: auto;
-            opacity: 0;
-            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            pointer-events: none;
-            border-radius: 8px;
-            z-index: 10;
-        }
-
-        .pro-card:hover .hidden-macho {
-            bottom: 10px;
-            opacity: 1;
         }
     </style>
 </head>
@@ -73,8 +51,6 @@
                 正式リリース、本当におめでとうございます！これまでの頑張りが認められ、Proランクをいただくことができました。
                 この恩は一生忘れません。これからもサーバーのさらなる発展のため、微力ながら一生ついていきます！忠誠を誓います！
             </p>
-            <!-- 拡張子を .png に設定 -->
-            <img src="macho.png" alt="Macho" class="hidden-macho">
         </div>
 
         <div style="margin-top: 30px;">

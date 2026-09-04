@@ -43,6 +43,20 @@
         .ip-card:active {
             transform: scale(0.98);
         }
+
+        /* 隠しEaster eggリンク */
+        .easter-link {
+            display: inline-block;
+            margin-top: 10px;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            opacity: 0.3;
+            transition: opacity 0.3s;
+        }
+        .easter-link:hover {
+            opacity: 1;
+        }
     </style>
 </head>
 <body>
@@ -246,6 +260,7 @@
 
     <footer>
         <p data-i18n="footer_text">This site is an unofficial fan site.</p>
+        <a href="easteregg/" class="easter-link" data-i18n="easter_link">🥚</a>
     </footer>
 
     <div class="lightbox" id="lightbox" onclick="closeLightbox()">
@@ -286,7 +301,8 @@
                 media_req3: "横動画は 3分以上、ライブは 1時間以上、LzPvP でプレイしていること",
                 media_req4: "動画タイトルまたは概要欄に <code>lzpvp.xyz</code> が記載されていること",
                 media_req5: "LzPvP の印象を著しく損なう内容でないこと",
-                media_btn: "Media Rank 保持者を見る"
+                media_btn: "Media Rank 保持者を見る",
+                easter_link: "🥚"
             },
             en: {
                 unofficial: "UNOFFICIAL", kits_title: "Available Kits",
@@ -320,7 +336,8 @@
                 media_req3: "Long-form videos at least 3 min, livestreams at least 1 hour, gameplay on LzPvP",
                 media_req4: "<code>lzpvp.xyz</code> must be in the video title or description",
                 media_req5: "Content must not significantly damage LzPvP's reputation",
-                media_btn: "View Media Rank Holders"
+                media_btn: "View Media Rank Holders",
+                easter_link: "🥚"
             }
         };
 

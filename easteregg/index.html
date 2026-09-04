@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Easter Eggs | LzPvP</title>
+    <link rel="icon" href="../LzPvP.png" type="image/png">
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        .back-link { display: inline-block; margin-bottom: 20px; color: var(--text-muted); text-decoration: none; font-size: 0.9rem; transition: 0.2s; }
+        .back-link:hover { color: var(--primary); }
+        .egg-header { text-align: center; margin-bottom: 40px; }
+        .egg-header h1 { font-family: 'Space Grotesk', sans-serif; font-size: 2.5rem; margin-bottom: 10px; color: var(--primary); }
+        .egg-list { display: flex; flex-direction: column; gap: 20px; }
+        .egg-card {
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            transition: all 0.2s ease;
+        }
+        .egg-card:hover {
+            border-color: var(--primary);
+            background: rgba(0, 242, 254, 0.03);
+            transform: translateY(-2px);
+        }
+        .egg-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 12px;
+            object-fit: cover;
+            border: 2px solid rgba(0, 242, 254, 0.3);
+            flex-shrink: 0;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .egg-img:hover {
+            transform: scale(1.05);
+        }
+        .egg-info { display: flex; flex-direction: column; gap: 6px; }
+        .egg-name { font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem; font-weight: 700; color: var(--text-main); }
+        .egg-msg { font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; }
+    </style>
+</head>
+<body>
+    <div class="bg-glow"></div>
+
+    <header>
+        <div class="logo">
+            <img src="../LzPvP.png" alt="" class="logo-img">
+            <span>LzPvP</span>
+            <small>EASTER EGGS</small>
+        </div>
+        <div class="header-right">
+            <div class="lang-switcher">
+                <span id="lang-jp" class="lang-btn active" onclick="switchLang('ja')">JP</span>
+                <span class="lang-divider">/</span>
+                <span id="lang-en" class="lang-btn" onclick="switchLang('en')">EN</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="content-section" style="margin-top: 40px;">
+        <a href="../" class="back-link">← ホームに戻る</a>
+
+        <div class="egg-header">
+            <h1 data-i18n="head_t">Easter Eggs</h1>
+            <p style="color: var(--text-muted);" data-i18n="head_d">隠されたクリエイターたちの素顔</p>
+        </div>
+
+        <div class="egg-list" id="egg-list"></div>
+    </main>
+
+    <footer>
+        <p data-i18n="footer_text">このサイトは非公式に制作されたファンサイトです。</p>
+    </footer>
+
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <img src="" alt="" class="lightbox-img" id="lightbox-img">
+    </div>
+
+    <script>
+        const easterEggs = [
+            {
+                name: "マッチョ",
+                img: "macho.png",
+                msgJa: "Map作者の趣味",
+                msgEn: "Map author's hobby"
+            },
+            {
+                name: "marlowww",
+                "img": "marlowww.png",
+                msgJa: "史上最悪のメンヘラチーター",
+                msgEn: "The worst mental health cheater in history"
+            },
+            {
+                name: "hokkori",
+                img: "hokkori.png",
+                msgJa: "ほっこりするなぁ",
+                msgEn: "So heartwarming"
+            }
+        ];
+
+        const translations = {
+            ja: {
+                head_t: "Easter Eggs",
+                head_d: "隠されたクリエイターたちの素顔",
+                footer_text: "このサイトは非公式に制作されたファンサイトです。"
+            },
+            en: {
+                head_t: "Easter Eggs",
+                head_d: "The hidden faces of creators",
+                footer_text: "This is an unofficial fan site."
+            }
+        };
+
+        function renderEggs(lang) {
+            const list = document.getElementById('egg-list');
+            list.innerHTML = easterEggs.map(e => `
+                <div class="egg-card">
+                    <img src="${e.img}" alt="${e.name}" class="egg-img" onclick="openLightbox('${e.img}')">
+                    <div class="egg-info">
+                        <span class="egg-name">${e.name}</span>
+                        <span class="egg-msg">${lang === 'ja' ? e.msgJa : e.msgEn}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function switchLang(lang) {
+            document.getElementById('lang-jp').classList.toggle('active', lang === 'ja');
+            document.getElementById('lang-en').classList.toggle('active', lang === 'en');
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang][key]) el.innerHTML = translations[lang][key];
+            });
+            renderEggs(lang);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const userLang = navigator.language || navigator.userLanguage;
+            switchLang(userLang.startsWith('ja') ? 'ja' : 'en');
+        });
+
+        function openLightbox(src) {
+            const lb = document.getElementById('lightbox');
+            if (!lb) return;
+            const img = document.getElementById('lightbox-img');
+            img.src = src;
+            lb.classList.remove('closing');
+            lb.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            const lb = document.getElementById('lightbox');
+            if (!lb) return;
+            lb.classList.add('closing');
+            setTimeout(() => {
+                lb.classList.remove('active', 'closing');
+                document.body.style.overflow = '';
+            }, 200);
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeLightbox();
+        });
+    </script>
+</body>
+</html>
